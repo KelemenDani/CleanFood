@@ -19,23 +19,23 @@ class UserService
             $modelResult = User::registerUser($user);
 
 
-            if ($modelResult) {
+            if ($modelResult['success']) {
                 return [
                     'status' => 200,
-                    'message' => 'User Registered',
+                    'message' => $modelResult['message'],
                 ];
 
             } else {
                 return [
                     'status' => 500,
-                    'message' => 'Registration failed',
+                    'message' => $modelResult['message'],
                 ];
             }
 
         } else {
             return [
                 'status' => 417,
-                'message' => 'Missing Credencials',
+                'message' => $modelResult['message'],
             ];
         }
     }

@@ -52,7 +52,8 @@ class User{
     public function setCity( $id): void {$this->city = $city;}
 
     public static function registerUser(User $user){
-        $config = new Config();
+        try {
+            $config = new Config();
         $connection = $config->getConnection();
 
         $name = $user->getName();
@@ -64,7 +65,25 @@ class User{
 
         $sql = "INSERT INTO users (name,email,password,phonenumber,zipcode,city) VALUES ('$name','$email','$password','$phonenumber','$zipcode','$city');";
 
-        return mysqli_query($connection,$sql);
+        if(mysqli_query($connection,$sql)){
+            return [
+                'success' => true,
+                'message' => 'User Registered'
+            ];
+        }else{
+            return [
+                'success' => false,
+                'message' => 'Unexpected Model error'
+            ];
+        }
+
+        } catch (Exception $error) {
+            return [
+                'success' => false,
+                'message' => $error->getMessage()
+            ];
+        }
+        
     }
     public static function loginUser(string $email){
         $config = new Config();

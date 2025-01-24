@@ -35,6 +35,7 @@
                 <button type="submit">Regisztrálok</button>
                 <button type="button" onclick="location.href='login.html'">Van már fiókom</button>
             </div>
+            <?php var_dump($response) ?>
         </form>
         <p class="message" id="error-message"></p>
     </div>

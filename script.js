@@ -11,8 +11,8 @@ document.getElementById('registration-form').addEventListener('submit', function
 
     const errorMessage = document.getElementById('error-message');
     errorMessage.textContent = '';
-
-    if (zipcode.length !== 4 || isNaN(zipcode)){
+    console.log(zipcode);
+    if (zipcode.length != 4 || isNaN(zipcode)){
         errorMessage.textContent = 'Ilyen irányítószám nem létezik!';
         return;
     }
