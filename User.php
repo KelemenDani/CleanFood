@@ -74,5 +74,5 @@ class User{
 
         return mysqli_query($connection,$sql);
     }
-
+    
 }
