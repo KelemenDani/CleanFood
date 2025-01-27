@@ -49,7 +49,7 @@ class User{
     
     public function setZipCode( $zipcode): void {$this->zipcode = $zipcode;}
     
-    public function setCity( $id): void {$this->city = $city;}
+    public function setCity( $city): void {$this->city = $city;}
 
     public static function registerUser(User $user){
         $config = new Config();
