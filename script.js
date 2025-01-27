@@ -3,8 +3,8 @@ document.getElementById('registration-form').addEventListener('submit', function
 
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
-    const zip = document.getElementById('zipcode').value;
-    const telepules = document.getElementById('city').value;
+    const zipcode = document.getElementById('zipcode').value;
+    const city = document.getElementById('city').value;
     const phonenumber = document.getElementById('phonenumber').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
@@ -12,11 +12,11 @@ document.getElementById('registration-form').addEventListener('submit', function
     const errorMessage = document.getElementById('error-message');
     errorMessage.textContent = '';
 
-    if (zipcode.length !== 4 || isNaN(zipcode)){
+    if (zipcode.length != 4 || isNaN(zipcode)){
         errorMessage.textContent = 'Ilyen irányítószám nem létezik!';
         return;
     }
-
+    
     if (password.length <= 5) {
         errorMessage.textContent = 'A jelszónak minimum 6 karakteresnek kell lennie!';
         return;
