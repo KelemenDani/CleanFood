@@ -10,7 +10,7 @@ class UserService
         $email = $user->getEmail();
         $password = $user->getPassword();
         $phonenumber = $user->getPhonenumber();
-        $zipcode = $user->getZipode();
+        $zipcode = $user->getZipcode();
         $city = $user->getCity();
 
         if ($name && $email && $password) {

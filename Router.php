@@ -7,34 +7,34 @@ class Router{
 
     private static $routes = [];
 
-    public static function get($endpoint,$callback){
+    public static function get($endpoint, $callback) {
         self::$routes["GET"][$endpoint] = $callback;
     }
-
-    public static function post($endpoint,$callback){
+    
+    public static function post($endpoint, $callback) {
         self::$routes["POST"][$endpoint] = $callback;
     }
-
-    public static function delete($endpoint,$callback){
+    
+    public static function delete($endpoint, $callback) {
         self::$routes["DELETE"][$endpoint] = $callback;
     }
-
-    public static function handleRequest(){
+    
+    public static function handleRequest() {
         $method = $_SERVER["REQUEST_METHOD"];
         $uri = $_SERVER["REQUEST_URI"];
         $parsedUrl = parse_url($uri);
-
-        $request = Request::getInstance($parsedUrl["path"],$method);
+    
+        $request = Request::getInstance($parsedUrl["path"], $method);
         $response = Response::getInstance();
-
-        if(self::$routes[$method][$parsedUrl["path"]]){
+    
+        if (isset(self::$routes[$method][$parsedUrl["path"]])) {
             $callback = self::$routes[$method][$parsedUrl["path"]];
-            $callback($request,$response);
-        }else{
+            $callback($request, $response);
+        } else {
             $response->setHtmlStatus(404);
             $response->setMessage("Endpoint not found");
         }
-
+    
         return $response;
     }
 
