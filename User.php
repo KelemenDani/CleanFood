@@ -1,6 +1,21 @@
 <?php
 
-require_once 'Config.php';
+class Config {
+    private $dbCon;
+
+    public function __construct() {
+        $this->dbCon = mysqli_connect('localhost', 'root', 'root', 'cleanfood');
+    }
+
+    public function getConnection() {
+        return $this->dbCon;
+    }
+
+    public function close() {
+        mysqli_close($this->dbCon);
+        $this->dbCon = null;
+    }
+}
 
 class User{
     private $id;
@@ -55,24 +70,24 @@ class User{
         $config = new Config();
         $connection = $config->getConnection();
 
-        $name = $user->getName();
         $email = $user->getEmail();
+
+
+        $checkEmailQuery = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($connection, $checkEmailQuery);
+
+        if (mysqli_num_rows($result) > 0) {
+            return false; 
+        }
+
+        $name = $user->getName();
         $password = $user->getPassword();
         $phonenumber = $user->getPhoneNumber();
         $zipcode = $user->getZipCode();
         $city = $user->getCity();
 
-        $sql = "INSERT INTO users (name,email,password,phonenumber,zipcode,city) VALUES ('$name','$email','$password','$phonenumber','$zipcode','$city');";
+        $sql = "INSERT INTO users (name, email, jelszo, phonenumber, zipcode, city) VALUES ('$name', '$email', '$password', '$phonenumber', '$zipcode', '$city');";
 
-        return mysqli_query($connection,$sql);
+        return mysqli_query($connection, $sql);
     }
-    public static function loginUser(string $email){
-        $config = new Config();
-        $connection = $config->getConnection();
-
-        $sql = "SELECT password FROM users WHERE email = '$email';";
-
-        return mysqli_query($connection,$sql);
-    }
-
 }

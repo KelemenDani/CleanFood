@@ -1,5 +1,6 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
-<?php require_once 'web.php' ;?>
+<?php require_once 'web.php'; ?>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
@@ -10,6 +11,9 @@
 <body>
     <div class="container">
         <h1>Cleanfood Regisztráció</h1>
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <p class="error-message"><?php echo $_SESSION['error_message']; unset($_SESSION['error_message']); ?></p>
+        <?php endif; ?>
         <form id="registration-form" method="post" action="/register">
             <label for="name">Teljes név:</label>
             <input type="text" id="name" name="name" required placeholder="Írd be a teljes neved">
@@ -32,8 +36,8 @@
                 <input type="text" id="city" name="city" required placeholder="Írd be a települést">
             </div>
             <div class="button-group">
-                <button type="submit">  <a href="Login.php">Regisztrálok</a></button>
-                <button type="button"> <a href="Login.php">Van már fiókom</a> </button>
+                <button type="submit">Regisztrálok</button>
+                <button type="button"> <a href="login.php">Van már fiókom</a> </button>
             </div>
         </form>
         <p class="message" id="error-message"></p>
@@ -41,3 +45,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+<?php ob_end_flush(); ?>

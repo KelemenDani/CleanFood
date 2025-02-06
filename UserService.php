@@ -1,73 +1,70 @@
 <?php
 require_once "User.php";
 
-class UserService
-{
+class UserService {
 
-    static function register(User $user)
-    {
+    static function register(User $user) {
         $name = $user->getName();
         $email = $user->getEmail();
         $password = $user->getPassword();
-        $phonenumber = $user->getPhonenumber();
-        $zipcode = $user->getZipcode();
+        $phonenumber = $user->getPhoneNumber();
+        $zipcode = $user->getZipCode();
         $city = $user->getCity();
 
         if ($name && $email && $password) {
-            $hashedPassword = password_hash($password,PASSWORD_DEFAULT);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $user->setPassword($hashedPassword);
             $modelResult = User::registerUser($user);
-
 
             if ($modelResult) {
                 return [
                     'status' => 200,
                     'message' => 'User Registered',
                 ];
-
             } else {
                 return [
-                    'status' => 500,
-                    'message' => 'Registration failed',
+                    'status' => 409,
+                    'message' => 'Email already exists',
                 ];
             }
-
         } else {
             return [
                 'status' => 417,
-                'message' => 'Missing Credencials',
+                'message' => 'Missing Credentials',
             ];
         }
     }
 
-    static function login(User $user)
-    {
-        $email = $user->getEmail();
-        $password = $user->getPassword();
+    static function login($email, $password) {
+        $config = new Config();
+        $connection = $config->getConnection();
 
-        if ($email && $password) {
-            $hashedPassword = User::loginUser($email);
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $result = mysqli_query($connection, $sql);
 
-            $isLoginSuccesful = password_verify($password,$hashedPassword);
-
-
-            if ($isLoginSuccesful) {
+        if (mysqli_num_rows($result) > 0) {
+            $user = mysqli_fetch_assoc($result);
+            if (password_verify($password, $user['jelszo'])) {
+                session_start();
+                $_SESSION['user'] = [
+                    'id' => $user['id'],
+                    'name' => $user['name'],
+                    'email' => $user['email']
+                ];
                 return [
                     'status' => 200,
-                    'message' => 'User Registered',
+                    'message' => 'Login successful',
                 ];
-
             } else {
                 return [
-                    'status' => 500,
-                    'message' => 'Registration failed',
+                    'status' => 401,
+                    'message' => 'Invalid password',
                 ];
             }
-
         } else {
             return [
-                'status' => 417,
-                'message' => 'Missing Credencials',
+                'status' => 404,
+                'message' => 'Email not found',
             ];
         }
     }

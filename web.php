@@ -2,17 +2,25 @@
 require_once "Router.php";
 require_once 'UserController.php';
 
-Router::get("/",function($request,$response){
+Router::get("/", function($request, $response) {
     $response->Setbody([]);
     $response->SetHtmlStatus(200);
     $response->Setmessage("success");
-
 });
 
-Router::post("/register",function($request,$response){
+Router::post("/register", function($request, $response) {
+    session_start();
     $result = UserController::registerUser($request);
-    $response->SetHtmlStatus(200);
-    $response->Setmessage("success");
+    if ($result['status'] != 200) {
+        $_SESSION['error_message'] = $result['message'];
+        header("Location: /index.php");
+        exit();
+    }
+});
+
+Router::post("/login", function($request, $response) {
+    session_start();
+    UserController::loginUser($request);
 });
 
 $response = Router::handleRequest();

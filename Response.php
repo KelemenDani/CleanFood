@@ -16,7 +16,7 @@ class Response
     {
         $res = new Response();
         $res->accept = $at;
-        //Setting server error as default
+        
         $res->htmlStatus = 500;
         $res->message = "Internal Server Error";
         $res->body = [];
