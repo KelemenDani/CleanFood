@@ -9,7 +9,6 @@ Router::get("/", function($request, $response) {
 });
 
 Router::post("/register", function($request, $response) {
-    session_start();
     $result = UserController::registerUser($request);
     if ($result['status'] != 200) {
         $_SESSION['error_message'] = $result['message'];
@@ -19,7 +18,6 @@ Router::post("/register", function($request, $response) {
 });
 
 Router::post("/login", function($request, $response) {
-    session_start();
     UserController::loginUser($request);
 });
 

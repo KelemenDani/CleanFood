@@ -25,7 +25,9 @@ class UserController {
             header("Location: /login.php");
             exit();
         } else {
-            return $response;
+            $_SESSION['error_message'] = $response['message'];
+            header("Location: /index.php");
+            exit();
         }
     }
 

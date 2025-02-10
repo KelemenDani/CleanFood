@@ -26,8 +26,8 @@ session_start();
             <input type="password" id="password" name="password" required placeholder="Írd be a jelszót">
 
             <div class="button-group">
-                <button type="submit">Bejelentkezés</button>
-                <button type="button"> <a href="index.php">Regisztráció</a> </button>
+                <button type="submit" class="btn">Bejelentkezés</button>
+                <button type="button" class="btn"> <a href="index.php">Regisztráció</a> </button>
             </div>
         </form>
     </div>

@@ -1,0 +1,193 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('hatterkep2.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+header {
+    background-color: rgba(255, 255, 255); /* Átlátszó háttérszín */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+header .tagline {
+    font-size: 14px;
+    color: #777;
+}
+
+header .search-bar {
+    flex: 1;
+    margin: 0 20px;
+}
+
+header .search-bar input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+header nav {
+    display: flex;
+}
+
+header nav a {
+    margin-left: 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    margin-right: 20px;
+    background-color: rgba(255, 255, 255); /* Átlátszó háttérszín */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.sidebar h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.main-content {
+    flex: 1;
+    background-color: rgba(255, 255, 255,0.8); /* Átlátszó háttérszín */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.popular-foods {
+    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.popular-foods h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.food-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.food-item {
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+    position: relative;
+}
+
+.food-item img {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    border-radius: 4px;
+}
+
+.food-name {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.healthy-foods {
+    margin-top: 40px;
+    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.healthy-foods h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.food-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.food-display .food-item {
+    text-align: center;
+    margin: 0 20px;
+}
+
+.food-recipe {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.carousel-controls button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.carousel-controls button:hover {
+    background-color: #45a049;
+}
+
+.footer {
+    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+}

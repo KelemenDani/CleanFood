@@ -36,8 +36,8 @@
                 <input type="text" id="city" name="city" required placeholder="Írd be a települést">
             </div>
             <div class="button-group">
-                <button type="submit">Regisztrálok</button>
-                <button type="button"> <a href="login.php">Van már fiókom</a> </button>
+                <button type="submit" class="btn">Regisztrálok</button>
+                <button type="button" class="btn"> <a href="login.php">Van már fiókom</a> </button>
             </div>
         </form>
         <p class="message" id="error-message"></p>
