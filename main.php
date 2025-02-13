@@ -36,6 +36,14 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="#">UMAMI</a></li>
                 <li><a href="#">Szafi Pékség</a></li>
                 <li><a href="#">Cleanfood Shop</a></li>
+                <li><a href="#">Starbucks</a></li>
+                <li><a href="#">Vagamary Cukrászda</a></li>
+                <li><a href="#">Trüffel</a></li>
+                <li><a href="#">Magda Cukrászda</a></li>
+                <li><a href="#">Buddha Original</a></li>
+                <li><a href="#">Megyeri Burgerező</a></li>
+                <li><a href="#">Pékinas</a></li>
+                
             </ul>
         </div>
         <div class="main-content">
