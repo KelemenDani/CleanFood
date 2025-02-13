@@ -1,0 +1,5 @@
+[
+	{"code":"SUMMER","amount":3000,"used":true},
+	{"code":"WINTER","amount":4000,"used":true},
+	{"code":"AUTUMN","amount":5000,"used":true}
+]

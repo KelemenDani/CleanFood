@@ -77,8 +77,11 @@ if (!isset($_SESSION['user'])) {
     </main>
     <footer class="footer">
         <span><?php echo date('Y-m-d '); ?></span>
-        <a href="#">Kuponok</a>
-        <a href="#">Profil</a>
+        <a href="kuponok.php">
+        <button class="coupon-button">Kuponok</button>
+        </a>
+        <a href="profil.php">
+        <button class="profile-button">Profil</button>
     </footer>
     
 </body>
