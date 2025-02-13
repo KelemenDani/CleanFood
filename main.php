@@ -34,42 +34,39 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="#">McDonald's</a></li>
                 <li><a href="#">Mandala Étterem</a></li>
                 <li><a href="#">UMAMI</a></li>
-                <li><a href="#">Natur Ételbár</a></li>
-                <li><a href="#">Áfium Gasztropince</a></li>
-                <li><a href="#">Szafi Smart Shop</a></li>
-                <li><a href="#">Vegan Love</a></li>
+                <li><a href="#">Szafi Pékség</a></li>
                 <li><a href="#">Cleanfood Shop</a></li>
             </ul>
         </div>
         <div class="main-content">
             <div class="popular-foods">
-                <h2>Legnépszerűbb ételeink</h2>
+                <h2>Legnépszerűbb Éttermeink</h2>
                 <div class="food-row">
                     <div class="food-item">
-                        <img src="main.kepek/veget_whopper.png" alt="Vegetáriánus Whopper">
-                        <div class="food-name">Vegetáriánus Whopper</div>
+                        <img src="main.kepek/veget_whopper.png" alt="CleanFood Shop">
+                        <div class="food-name">Cleanfood Shop</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/sajtburger.png" alt="Gluténmentes SajtBurger">
-                        <div class="food-name">Gluténmentes SajtBurger</div>
+                        <img src="main.kepek/sajtburger.png" alt="Burger king">
+                        <div class="food-name">Burger King</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/gyrostek.png" alt="Görög NEM 'Pipi' Gyros Tekercs">
-                        <div class="food-name">Görög NEM 'Pipi' Gyros Tekercs</div>
+                        <img src="main.kepek/gyrostek.png" alt="Mandala Éterrem">
+                        <div class="food-name">Mandala Éterrem</div>
                     </div>
                 </div>
                 <div class="food-row">
                     <div class="food-item">
-                        <img src="main.kepek/baswhopper.png" alt="Plant-Based Whopper">
-                        <div class="food-name">Plant-Based Whopper</div>
+                        <img src="main.kepek/baswhopper.png" alt="Lyr Étterem">
+                        <div class="food-name">Lyr Étterem</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/mcfarm.png" alt="Gluténmentes Sertés McFarm">
-                        <div class="food-name">Gluténmentes Sertés McFarm</div>
+                        <img src="main.kepek/mcfarm.png" alt="Starbucks">
+                        <div class="food-name">Starbucks </div>
                     </div>
                     <div class="food-item">
                         <img src="main.kepek/gorogtal.png" alt="TÁL Görög NEM 'Pipi' Gyros">
-                        <div class="food-name">TÁL Görög NEM 'Pipi' Gyros</div>
+                        <div class="food-name">Szafi Pékség</div>
                     </div>
                 </div>
             </div>
