@@ -39,33 +39,36 @@ if (!isset($_SESSION['user'])) {
             </ul>
         </div>
         <div class="main-content">
+            
             <div class="popular-foods">
                 <h2>Legnépszerűbb Éttermeink</h2>
+
                 <div class="food-row">
                     <div class="food-item">
-                        <img src="main.kepek/market_logo.webp" alt="Vegetáriánus Whopper">
+                        <img src="main.kepek/market_logo.webp" alt="CleanFood Shop">
                         <div class="food-name">CleanFood Shop</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/burgerking.png" alt="Gluténmentes SajtBurger">
+                        <img src="main.kepek/burgerking.png" alt="Burger King">
                         <div class="food-name">Burger King</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/mandala.png" alt="Görög NEM 'Pipi' Gyros Tekercs">
-                        <div class="food-name">Mandala Étterem<div>
+                        <img src="main.kepek/mandala.png" alt="Mandala Étterem">
+                        <div class="food-name">Mandala Étterem</div>
                     </div>
                 </div>
+
                 <div class="food-row">
                     <div class="food-item">
-                        <img src="main.kepek/lyr.png" alt="Plant-Based Whopper">
+                        <img src="main.kepek/lyr.png" alt="Lyr">
                         <div class="food-name">Lyr</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/starbucks.png" alt="Gluténmentes Sertés McFarm">
+                        <img src="main.kepek/starbucks.png" alt="Starbucks">
                         <div class="food-name">Starbucks</div>
                     </div>
                     <div class="food-item">
-                        <img src="main.kepek/szafi.png" alt="TÁL Görög NEM 'Pipi' Gyros">
+                        <img src="main.kepek/szafi.png" alt="Szafi Pékség">
                         <div class="food-name">Szafi Pékség</div>
                     </div>
                 </div>
