@@ -43,6 +43,7 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="#">Buddha Original</a></li>
                 <li><a href="#">Megyeri Burgerező</a></li>
                 <li><a href="#">Pékinas</a></li>
+                <li><a href="#">Tesco</a></li>
                 
             </ul>
         </div>
