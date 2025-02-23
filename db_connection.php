@@ -1,8 +1,8 @@
 <?php
 $host = 'localhost'; // Adatbázis szerver
 $dbname = 'cleanfood'; // Adatbázis neve
-$username = 'your_username'; // Adatbázis felhasználónév
-$password = 'your_password'; // Adatbázis jelszó
+$username = 'root'; // Adatbázis felhasználónév
+$password = 'root'; // Adatbázis jelszó
 
 try {
     $conn = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);

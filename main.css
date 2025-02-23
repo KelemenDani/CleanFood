@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     background-image: url('hatterkep2.png');
@@ -9,46 +10,33 @@ body {
 }
 
 header {
-    background-color: rgba(255, 255, 255); /* Átlátszó háttérszín */
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
 }
 
-header .logo {
+.logo {
     font-size: 24px;
     font-weight: bold;
-    color: #333;
 }
 
-header .tagline {
+.tagline {
     font-size: 14px;
-    color: #777;
+    font-style: italic;
 }
 
-header .search-bar {
-    flex: 1;
-    margin: 0 20px;
+.search-bar input {
+    padding: 5px;
+    font-size: 14px;
 }
 
-header .search-bar input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-header nav {
-    display: flex;
-}
-
-header nav a {
-    margin-left: 15px;
+nav a {
+    color: #fff;
     text-decoration: none;
-    color: #333;
-    font-size: 16px;
+    margin-left: 20px;
 }
 
 main {
@@ -57,16 +45,16 @@ main {
 }
 
 .sidebar {
-    width: 250px;
-    margin-right: 20px;
-    background-color: rgba(255, 255, 255); /* Átlátszó háttérszín */
+    width: 200px;
     padding: 20px;
+    background-color: #f8f8f8;
+    margin-right: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .sidebar h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 .sidebar ul {
@@ -85,13 +73,14 @@ main {
 
 .main-content {
     flex: 1;
-    background-color: rgba(255, 255, 255,0.8); /* Átlátszó háttérszín */
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .popular-foods {
-    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    margin-bottom: 40px;
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
 }
@@ -109,6 +98,7 @@ main {
 }
 
 .food-item {
+    width: 30%;
     text-align: center;
     flex: 1;
     margin: 0 10px;
@@ -117,20 +107,21 @@ main {
 
 .food-item img {
     width: 100%;
-    max-width: 200px;
     height: auto;
-    border-radius: 400px;
+    border-radius: 50%; /* Teljesen kerek képek */
+    max-width: 200px;
 }
 
 .food-name {
     margin-top: 10px;
     font-size: 16px;
+    font-weight: bold;
     color: #333;
 }
 
 .healthy-foods {
     margin-top: 40px;
-    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -178,7 +169,7 @@ main {
 }
 
 .footer {
-    background-color: rgba(255, 255, 255, 0.6); /* Átlátszó háttérszín */
+    background-color: rgba(255, 255, 255, 0.6);
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -191,6 +182,7 @@ main {
     color: #333;
     font-size: 16px;
 }
+
 .coupon-button .profile-button {
     background-color: #45a049;
     color: white;
@@ -204,4 +196,77 @@ main {
 
 .coupon-button:hover {
     background-color: #3d8b40;
+}
+
+.recipe-gallery {
+    margin-top: 40px;
+}
+
+.recipe-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipe-item {
+    width: 30%;
+    position: relative;
+    text-align: center;
+}
+
+.recipe-item img {
+    width: 100%;
+    height: 200px; /* Állítsuk be a képek magasságát */
+    object-fit: cover; /* A képek arányainak megtartása */
+    border-radius: 50%; /* Teljesen kerek képek */
+}
+
+.recipe-info {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: none;
+}
+
+.recipe-item:hover .recipe-info {
+    display: block;
+}
+
+.recipe-note {
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    color: black;
+    margin-top: 20px;
+}
+
+.why-order {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+}
+
+.why-order h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.why-order ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+.why-order ul li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
 }

@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('profil.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-container {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(106, 76, 54, 0.8); /* Sötétebb barna háttér, átlátszó */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Lekerekített sarkok */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+    color: white;
+}
+
+input[type="text"],
+input[type="email"] {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 32%; /* Egyenlő méretű gombok */
+    box-sizing: border-box;
+}
+
+.update-button {
+    background-color: #2c0d0d; /* Dark Green */
+}
+
+.update-button:hover {
+    background-color: #2c0d0d; /* Forest Green */
+}
+
+.delete-button {
+    background-color: #654321; /* Sötétbarna */
+}
+
+.delete-button:hover {
+    background-color: #4B3621;
+}
+
+.back-button {
+    background-color: #D2B48C; /* Bézs */
+}
+
+.back-button:hover {
+    background-color: #C3A384;
+}

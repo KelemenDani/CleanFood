@@ -81,15 +81,54 @@ if (!isset($_SESSION['user'])) {
                     </div>
                 </div>
             </div>
+
+            
+            <div class="recipe-gallery">
+                <h2>Otthoni étel ajánló</h2>
+                <div class="recipe-row">
+                    <div class="recipe-item">
+                        <img src="palacsinta.png" alt="banán_palacsinta">
+                        <div class="recipe-info">1 érett banán, 2 tojás, pici fahéj (opcionális) Elkészítés: A banánt villával összetöröd, hozzáadod a tojásokat, jól összekevered, majd forró serpenyőben kis lepényeket sütsz belőle.</div>
+                    </div>
+                    <div class="recipe-item">
+                        <img src="avokados.png" alt="Avokádós tojáskrém">
+                        <div class="recipe-info">Hozzávalók: avokádó, tojás, só, bors. Elkészítés: Az avokádót és a tojásokat villával összetöröd, ízesíted sóval, borssal, pár csepp citromlével. Kenyér nélkül, zöldséghasábokkal is szuper!</div>
+                    </div>
+                    <div class="recipe-item">
+                        <img src="zöldség_tal.png" alt="Sült zöldségtál ">
+                        <div class="recipe-info">1 cukkini, 1 répa, 1 paprika ,Olívaolaj, só, bors. Elkészítés: A zöldségeket felvágod, meglocsolod olívaolajjal, sózod, borsozod, és sütőben 200 fokon kb. 20 perc alatt megsütöd.</div>
+                    </div>
+                </div>
+                <div class="recipe-note">
+                    <em>Ezekhez a hozzávalókat mind beszerezheted a CleanFood Shopba</em>
+                </div>
+            </div>
+
+            <!-- Új div a szöveghez -->
+            <div class="why-order">
+                <h2>Miért éri meg tőlünk rendelni?</h2>
+                <ul>
+                    <li>✔️ Friss és egészséges alapanyagok</li>
+                    <li>✔️ Gyors és megbízható kiszállítás</li>
+                    <li>✔️ Kedvező árak és akciók</li>
+                    <li>✔️ Több,  partnert is meg találsz nálunk , köztük egészen különleges, távoli konyhákat is</li>
+                    <li>✔️Legyen szó reggeli kávéról, hétköznapi ebédről a kollégáiddal, egy gyors bevásárlásról, egy romantikus vacsoráról, vagy akár titkos éjjeli snackről: a cleanfoodrol minden alkalomra rendelhetsz</li>
+                    <li>✔️ A rendelési folyamatunk egyszerű és gyors: teszteld, és rendelj weben</li>
+                    <li>✔️ Válaszd a maximális biztonságot: cleanfood szállítás érintkezésmentes kiszállítás, online előre fizetésse</li>
+                    <li>✔️ Széles választék kedvező áron a menüajánlatoktól kezdve egészen a prémium ételekig</li>
+                </ul>
+            </div>
         </div>
     </main>
     <footer class="footer">
         <span><?php echo date('Y-m-d '); ?></span>
+        
         <a href="kuponok.php">
         <button class="coupon-button">Kuponok</button>
         </a>
         <a href="profil.php">
-        <button class="profile-button">Profil</button>
+        <button class="profile-button">Adatok</button>
+        </a>
     </footer>
     
 </body>
