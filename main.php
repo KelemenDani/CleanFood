@@ -16,6 +16,23 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <script>
+    function updateTime() {
+        const now = new Date();
+        
+        const formattedTime = 
+            now.getFullYear() + "-" + 
+            String(now.getMonth()+1).padStart(2, '0') + "-" + 
+            String(now.getDate()).padStart(2, '0') + " " + 
+            String(now.getHours()).padStart(2, '0') + ":" + 
+            String(now.getMinutes()).padStart(2, '0') + ":" + 
+            String(now.getSeconds()).padStart(2, '0');
+        
+        document.getElementById('currentTime').textContent = formattedTime;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+    </script>
     <header>
         <div class="logo">Cleanfood</div>
         <div class="tagline">HEATHEN-FREE</div>
@@ -27,7 +44,6 @@ if (!isset($_SESSION['user'])) {
                 <a href="login.php">Bejelentkezés</a>
                 <a href="index.php">Regisztráció</a>
             <?php endif; ?>
-            <!-- Bevásárlókocsi ikon és Adatok gomb -->
             <div class="header-buttons">
                 <a href="cart.php" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -138,7 +154,7 @@ if (!isset($_SESSION['user'])) {
         </div>
     </main>
     <footer class="footer">
-        <span><?php echo date('Y-m-d'); ?></span>
+        <span id="currentTime"></span>
     </footer>
 </body>
 </html>
