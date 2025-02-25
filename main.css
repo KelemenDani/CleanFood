@@ -284,3 +284,27 @@ main {
     color: black;
     font-weight: bold;
 }
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Térköz a gombok között */
+    margin-left: auto; /* Jobbra igazítás */
+}
+
+.cart-icon, .profile-button {
+    font-size: 18px; /* Ikon és szöveg mérete */
+    color: #000; /* Szöveg és ikon színe fekete */
+    text-decoration: none; /* Aláhúzás eltávolítása */
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Térköz az ikon és a szöveg között */
+    padding: 8px 12px; /* Belső térköz */
+    background-color: #fff; /* Fehér háttér */
+    border-radius: 8px; /* Kerekített sarkok */
+    border: 1px solid #ddd; /* Halvány szegély */
+    transition: background-color 0.3s, color 0.3s; /* Sima átmenet */
+}
+
+.cart-icon:hover, .profile-button:hover {
+    background-color: #d4edda; /* Világos zöldes háttér hover állapotban */
+}

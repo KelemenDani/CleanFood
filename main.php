@@ -12,6 +12,8 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cleanfood Főoldal</title>
     <link rel="stylesheet" href="main.css">
+    <!-- FontAwesome ikonok betöltése -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -25,13 +27,21 @@ if (!isset($_SESSION['user'])) {
                 <a href="login.php">Bejelentkezés</a>
                 <a href="index.php">Regisztráció</a>
             <?php endif; ?>
+            <!-- Bevásárlókocsi ikon és Adatok gomb -->
+            <div class="header-buttons">
+                <a href="cart.php" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <a href="profil.php" class="profile-button">
+                    <i class="fas fa-user"></i> Adatok
+                </a>
+            </div>
         </nav>
     </header>
     <main>
         <div class="sidebar">
             <h2>Éttermeink</h2>
             <ul>
-
                 <li><a href="burgerking.php">Burger King</a></li>
                 <li><a href="LYR.php">LYR Speciality Coffee and Food</a></li>
                 <li><a href="McDonald.php">McDonald's</a></li>
@@ -46,31 +56,24 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="Buddha.php">Buddha Original</a></li>
                 <li><a href="Megyeri.php">Megyeri Burgerező</a></li>
                 <li><a href="Pekinak.php">Pékinas</a></li>
-              
-
             </ul>
         </div>
         <div class="main-content">
-            
             <div class="popular-foods">
                 <h2>Legnépszerűbb Éttermeink</h2>
-
                 <div class="food-row">
-                 
                     <div class="food-item">
                         <a href="Shop.php">
                             <img src="main.kepek/market_logo.webp" alt="CleanFood Shop">
                         </a>
                         <div class="food-name"><a href="Shop.php">CleanFood Shop</a></div>
                     </div>
-
                     <div class="food-item">
                         <a href="burgerking.php">
                             <img src="main.kepek/burgerking.png" alt="Burger King">
                         </a>
                         <div class="food-name"><a href="burgerking.php">Burger King</a></div>
                     </div>
-
                     <div class="food-item">
                         <a href="Mandala.php">
                         <img src="main.kepek/mandala.png" alt="Mandala Étterem">
@@ -78,9 +81,6 @@ if (!isset($_SESSION['user'])) {
                         <div class="food-name"><a href="Mandala.php">Mandala Étterem</a></div>
                     </div>
                 </div>
-
-                
-
                 <div class="food-row">
                     <div class="food-item">
                         <a href="LYR.php">
@@ -88,7 +88,6 @@ if (!isset($_SESSION['user'])) {
                         </a>
                         <div class="food-name"><a href="LYR.php">LYR Étterem</a></div>
                     </div>
-
                     <div class="food-item">
                         <a href="Starbucks.php">
                         <img src="main.kepek/starbucks.png" alt="Starbucks">
@@ -99,13 +98,10 @@ if (!isset($_SESSION['user'])) {
                         <a href="Szafi.php">
                         <img src="main.kepek/szafi.png" alt="Szafi Pékség">
                         </a>
-
                         <div class="food-name"> <a href="Szafi.php">Szafi pékség</a></div>
                     </div>
                 </div>
             </div>
-
-            
             <div class="recipe-gallery">
                 <h2>Otthoni étel ajánló</h2>
                 <div class="recipe-row">
@@ -126,8 +122,6 @@ if (!isset($_SESSION['user'])) {
                     <em>Ezekhez a hozzávalókat mind beszerezheted a CleanFood Shopba</em>
                 </div>
             </div>
-
-            <!-- Új div a szöveghez -->
             <div class="why-order">
                 <h2>Miért éri meg tőlünk rendelni?</h2>
                 <ul>
@@ -145,14 +139,6 @@ if (!isset($_SESSION['user'])) {
     </main>
     <footer class="footer">
         <span><?php echo date('Y-m-d'); ?></span>
-        
-        <a href="kuponok.php">
-        <button class="coupon-button">Kuponok</button>
-        </a>
-        <a href="profil.php">
-        <button class="profile-button">Adatok</button>
-        </a>
     </footer>
-    
 </body>
 </html>

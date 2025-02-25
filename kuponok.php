@@ -1,31 +1,33 @@
 <?php
 session_start();
-$couponsFile = 'coupons.json';
+require 'db.php'; // Adatbázis kapcsolat
 
-// Kuponok betöltése fájlból
-$coupons = file_exists($couponsFile) 
-    ? json_decode(file_get_contents($couponsFile), true) 
-    : [];
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
 
-if(empty($coupons)){
-    $coupons = [
-        [
-            'code' => 'SUMMER',
-            'amount' => 3000,
-            'used' => false
-        ],
-        [
-            'code' => 'WINTER',
-            'amount' => 4000,
-            'used' => false
-        ],
-        [
-            'code' => 'AUTUMN',
-            'amount' => 5000,
-            'used' => false
-        ]
-    ];
-    file_put_contents($couponsFile, json_encode($coupons));
+$user_id = $_SESSION['user_id'];
+
+// Kuponok lekérése az adatbázisból
+$coupons = [];
+$query = "SELECT * FROM coupons";
+$result = $conn->query($query);
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        $coupons[] = $row;
+    }
+}
+
+// Felhasznált kuponok lekérése az adatbázisból
+$used_coupons = [];
+$query = "SELECT coupon_id FROM used_coupons WHERE user_id = $user_id";
+$result = $conn->query($query);
+if ($result->rowCount() > 0) {
+    while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+        $used_coupons[] = $row['coupon_id'];
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -39,9 +41,9 @@ if(empty($coupons)){
         <div style="margin: 20px; padding: 10px; border: 1px solid #ccc;">
             <h3><?= $coupon['code'] ?></h3>
             <p>Érték: <?= $coupon['amount'] ?> Ft</p>
-            <?php if(!$coupon['used']): ?>
+            <?php if (!in_array($coupon['id'], $used_coupons)): ?>
                 <form method="POST" action="use_kupon.php">
-                    <input type="hidden" name="code" value="<?= $coupon['code'] ?>">
+                    <input type="hidden" name="coupon_id" value="<?= $coupon['id'] ?>">
                     <button type="submit">Kupon felhasználása</button>
                 </form>
             <?php else: ?>
