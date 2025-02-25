@@ -21,29 +21,33 @@ if (!isset($_SESSION['user'])) {
             <input type="text" placeholder="Keresés...">
         </div>
         <nav>
-            <a href="Login.php">Bejelentkezés</a>
-            <a href="index.php">Regisztráció</a>
+            <?php if (!isset($_SESSION['user'])): ?>
+                <a href="login.php">Bejelentkezés</a>
+                <a href="index.php">Regisztráció</a>
+            <?php endif; ?>
         </nav>
     </header>
     <main>
         <div class="sidebar">
             <h2>Éttermeink</h2>
             <ul>
-                <li><a href="#">Burger King</a></li>
-                <li><a href="#">LYR Speciality Coffee and Food</a></li>
-                <li><a href="#">McDonald's</a></li>
-                <li><a href="#">Mandala Étterem</a></li>
-                <li><a href="#">UMAMI</a></li>
-                <li><a href="#">Szafi Pékség</a></li>
-                <li><a href="#">Cleanfood Shop</a></li>
-                <li><a href="#">Starbucks</a></li>
-                <li><a href="#">Vagamary Cukrászda</a></li>
-                <li><a href="#">Trüffel</a></li>
-                <li><a href="#">Magda Cukrászda</a></li>
-                <li><a href="#">Buddha Original</a></li>
-                <li><a href="#">Megyeri Burgerező</a></li>
-                <li><a href="#">Pékinas</a></li>
-                
+
+                <li><a href="burgerking.php">Burger King</a></li>
+                <li><a href="LYR.php">LYR Speciality Coffee and Food</a></li>
+                <li><a href="McDonald.php">McDonald's</a></li>
+                <li><a href="Mandala.php">Mandala Étterem</a></li>
+                <li><a href="Unami.php">UMAMI</a></li>
+                <li><a href="Szafi.php">Szafi Pékség</a></li>
+                <li><a href="Shop.php">Cleanfood Shop</a></li>
+                <li><a href="Starbucks.php">Starbucks</a></li>
+                <li><a href="Vagamary.php">Vagamary Cukrászda</a></li>
+                <li><a href="Truffel.php">Trüffel</a></li>
+                <li><a href="Magda.php">Magda Cukrászda</a></li>
+                <li><a href="Buddha.php">Buddha Original</a></li>
+                <li><a href="Megyeri.php">Megyeri Burgerező</a></li>
+                <li><a href="Pekinak.php">Pékinas</a></li>
+              
+
             </ul>
         </div>
         <div class="main-content">
@@ -52,32 +56,51 @@ if (!isset($_SESSION['user'])) {
                 <h2>Legnépszerűbb Éttermeink</h2>
 
                 <div class="food-row">
+                 
                     <div class="food-item">
-                        <img src="main.kepek/market_logo.webp" alt="CleanFood Shop">
-                        <div class="food-name">CleanFood Shop</div>
+                        <a href="Shop.php">
+                            <img src="main.kepek/market_logo.webp" alt="CleanFood Shop">
+                        </a>
+                        <div class="food-name"><a href="Shop.php">CleanFood Shop</a></div>
                     </div>
+
                     <div class="food-item">
-                        <img src="main.kepek/burgerking.png" alt="Burger King">
-                        <div class="food-name">Burger King</div>
+                        <a href="burgerking.php">
+                            <img src="main.kepek/burgerking.png" alt="Burger King">
+                        </a>
+                        <div class="food-name"><a href="burgerking.php">Burger King</a></div>
                     </div>
+
                     <div class="food-item">
+                        <a href="Mandala.php">
                         <img src="main.kepek/mandala.png" alt="Mandala Étterem">
-                        <div class="food-name">Mandala Étterem</div>
+                        </a>
+                        <div class="food-name"><a href="Mandala.php">Mandala Étterem</a></div>
                     </div>
                 </div>
 
+                
+
                 <div class="food-row">
                     <div class="food-item">
+                        <a href="LYR.php">
                         <img src="main.kepek/lyr.png" alt="Lyr">
-                        <div class="food-name">Lyr</div>
+                        </a>
+                        <div class="food-name"><a href="LYR.php">LYR Étterem</a></div>
                     </div>
+
                     <div class="food-item">
+                        <a href="Starbucks.php">
                         <img src="main.kepek/starbucks.png" alt="Starbucks">
-                        <div class="food-name">Starbucks</div>
+                        </a>
+                        <div class="food-name"><a href="Starbucks.php">Starbucks</a></div>
                     </div>
                     <div class="food-item">
+                        <a href="Szafi.php">
                         <img src="main.kepek/szafi.png" alt="Szafi Pékség">
-                        <div class="food-name">Szafi Pékség</div>
+                        </a>
+
+                        <div class="food-name"> <a href="Szafi.php">Szafi pékség</a></div>
                     </div>
                 </div>
             </div>
@@ -111,17 +134,17 @@ if (!isset($_SESSION['user'])) {
                     <li>✔️ Friss és egészséges alapanyagok</li>
                     <li>✔️ Gyors és megbízható kiszállítás</li>
                     <li>✔️ Kedvező árak és akciók</li>
-                    <li>✔️ Több,  partnert is meg találsz nálunk , köztük egészen különleges, távoli konyhákat is</li>
-                    <li>✔️Legyen szó reggeli kávéról, hétköznapi ebédről a kollégáiddal, egy gyors bevásárlásról, egy romantikus vacsoráról, vagy akár titkos éjjeli snackről: a cleanfoodrol minden alkalomra rendelhetsz</li>
+                    <li>✔️ Több, partnert is meg találsz nálunk, köztük egészen különleges, távoli konyhákat is</li>
+                    <li>✔️ Legyen szó reggeli kávéról, hétköznapi ebédről a kollégáiddal, egy gyors bevásárlásról, egy romantikus vacsoráról, vagy akár titkos éjjeli snackről: a cleanfoodrol minden alkalomra rendelhetsz</li>
                     <li>✔️ A rendelési folyamatunk egyszerű és gyors: teszteld, és rendelj weben</li>
-                    <li>✔️ Válaszd a maximális biztonságot: cleanfood szállítás érintkezésmentes kiszállítás, online előre fizetésse</li>
+                    <li>✔️ Válaszd a maximális biztonságot: cleanfood szállítás érintkezésmentes kiszállítás, online előre fizetéssel</li>
                     <li>✔️ Széles választék kedvező áron a menüajánlatoktól kezdve egészen a prémium ételekig</li>
                 </ul>
             </div>
         </div>
     </main>
     <footer class="footer">
-        <span><?php echo date('Y-m-d '); ?></span>
+        <span><?php echo date('Y-m-d'); ?></span>
         
         <a href="kuponok.php">
         <button class="coupon-button">Kuponok</button>

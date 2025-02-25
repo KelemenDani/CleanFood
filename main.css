@@ -39,6 +39,20 @@ nav a {
     margin-left: 20px;
 }
 
+
+
+.food-name a {
+    color: black; /* A link színe mindig fehér marad */
+    text-decoration: none; /* A linkek ne legyenek aláhúzva */
+}
+
+.food-name a:visited,
+.food-name a:active,
+.food-name a:hover {
+    color: black; /* A link színe mindig fehér marad */
+    text-decoration: none; /* A linkek ne legyenek aláhúzva */
+}
+
 main {
     display: flex;
     padding: 20px;
