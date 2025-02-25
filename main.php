@@ -31,6 +31,7 @@ if (!isset($_SESSION['user'])) {
         <div class="sidebar">
             <h2>Éttermeink</h2>
             <ul>
+
                 <li><a href="burgerking.php">Burger King</a></li>
                 <li><a href="LYR.php">LYR Speciality Coffee and Food</a></li>
                 <li><a href="McDonald.php">McDonald's</a></li>
@@ -45,7 +46,8 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="Buddha.php">Buddha Original</a></li>
                 <li><a href="Megyeri.php">Megyeri Burgerező</a></li>
                 <li><a href="Pekinak.php">Pékinas</a></li>
-                
+              
+
             </ul>
         </div>
         <div class="main-content">
@@ -91,7 +93,7 @@ if (!isset($_SESSION['user'])) {
                         <a href="Starbucks.php">
                         <img src="main.kepek/starbucks.png" alt="Starbucks">
                         </a>
-                        <div class="food-name"><a href="burgerking.php">Starbucks</a></div>
+                        <div class="food-name"><a href="Starbucks.php">Starbucks</a></div>
                     </div>
                     <div class="food-item">
                         <a href="Szafi.php">
