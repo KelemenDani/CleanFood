@@ -1,18 +1,29 @@
 <?php
 session_start();
-$code = $_POST['code'] ?? '';
-$couponsFile = 'coupons.json';
+require 'db.php'; // Adatbázis kapcsolat
 
-$coupons = json_decode(file_get_contents($couponsFile), true);
-
-foreach($coupons as &$coupon){
-    if($coupon['code'] === $code && !$coupon['used']){
-        $coupon['used'] = true;
-        break;
-    }
+// Ellenőrizzük, hogy a felhasználó be van-e jelentkezve
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
 }
 
-file_put_contents($couponsFile, json_encode($coupons));
-header('Location: kuponok.php');
-exit;
-?>
+$user_id = $_SESSION['user_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['coupon_id'])) {
+    $coupon_id = $_POST['coupon_id'];
+
+    // Ellenőrizzük, hogy a felhasználó már felhasználta-e ezt a kupont
+    $query = "SELECT * FROM used_coupons WHERE user_id = $user_id AND coupon_id = $coupon_id";
+    $result = $conn->query($query);
+
+    if ($result->rowCount() === 0) {
+        // Ha még nem használta fel, akkor hozzáadjuk az adatbázishoz
+        $query = "INSERT INTO used_coupons (user_id, coupon_id) VALUES ($user_id, $coupon_id)";
+        $conn->query($query);
+    }
+
+    // Visszairányítjuk a felhasználót a kuponok oldalra
+    header('Location: kuponok.php');
+    exit;
+}
