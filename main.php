@@ -56,6 +56,9 @@ if (!isset($_SESSION['user'])) {
     </header>
     <main>
         <div class="sidebar">
+        <footer class="footer">
+        <span id="currentTime"></span>
+    </footer>
             <h2>Éttermeink</h2>
             <ul>
                 <li><a href="burgerking.php">Burger King</a></li>
@@ -153,8 +156,5 @@ if (!isset($_SESSION['user'])) {
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <span id="currentTime"></span>
-    </footer>
 </body>
 </html>

@@ -7,6 +7,9 @@ $products = [
     3 => ['id' => 3, 'name' => 'teszt', 'price' => 4490],
 ];
 
+$_SESSION['cart'] = $_SESSION['cart'] ?? [];    
+
+
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
@@ -25,7 +28,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['id'])
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="hu">
 <head>

@@ -297,8 +297,8 @@ main {
     text-decoration: none;
     display: flex;
     align-items: center;
-    gap: 5px; 
-    padding: 8px 12px; 
+    gap: 2.5px; 
+    padding: 8px 10px; 
     background-color: #fff; 
     border-radius: 8px; 
     border: 1px solid #ddd;
