@@ -16,23 +16,6 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <script>
-    function updateTime() {
-        const now = new Date();
-        
-        const formattedTime = 
-            now.getFullYear() + "-" + 
-            String(now.getMonth()+1).padStart(2, '0') + "-" + 
-            String(now.getDate()).padStart(2, '0') + " " + 
-            String(now.getHours()).padStart(2, '0') + ":" + 
-            String(now.getMinutes()).padStart(2, '0') + ":" + 
-            String(now.getSeconds()).padStart(2, '0');
-        
-        document.getElementById('currentTime').textContent = formattedTime;
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-    </script>
     <header>
         <div class="logo">Cleanfood</div>
         <div class="tagline">HEATHEN-FREE</div>
@@ -156,5 +139,6 @@ if (!isset($_SESSION['user'])) {
             </div>
         </div>
     </main>
+    <script src="main.js"></script>
 </body>
 </html>
