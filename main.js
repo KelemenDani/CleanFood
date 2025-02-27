@@ -15,6 +15,21 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
+    function updateTime() {
+        const now = new Date();
+        
+        const formattedTime = 
+            now.getFullYear() + "-" + 
+            String(now.getMonth()+1).padStart(2, '0') + "-" + 
+            String(now.getDate()).padStart(2, '0') + " " + 
+            String(now.getHours()).padStart(2, '0') + ":" + 
+            String(now.getMinutes()).padStart(2, '0') + ":" + 
+            String(now.getSeconds()).padStart(2, '0');
+        
+        document.getElementById('currentTime').textContent = formattedTime;
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
 
     nextButton.addEventListener('click', function() {
         currentIndex = (currentIndex + 1) % foodItems.length;

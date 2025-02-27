@@ -12,7 +12,7 @@ if (!isset($_SESSION['user'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cleanfood Főoldal</title>
     <link rel="stylesheet" href="main.css">
-    <!-- FontAwesome ikonok betöltése -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -27,7 +27,6 @@ if (!isset($_SESSION['user'])) {
                 <a href="login.php">Bejelentkezés</a>
                 <a href="index.php">Regisztráció</a>
             <?php endif; ?>
-            <!-- Bevásárlókocsi ikon és Adatok gomb -->
             <div class="header-buttons">
                 <a href="cart.php" class="cart-icon">
                     <i class="fas fa-shopping-cart"></i>
@@ -40,6 +39,9 @@ if (!isset($_SESSION['user'])) {
     </header>
     <main>
         <div class="sidebar">
+        <footer class="footer">
+        <span id="currentTime"></span>
+    </footer>
             <h2>Éttermeink</h2>
             <ul>
                 <li><a href="burgerking.php">Burger King</a></li>
@@ -137,8 +139,6 @@ if (!isset($_SESSION['user'])) {
             </div>
         </div>
     </main>
-    <footer class="footer">
-        <span><?php echo date('Y-m-d'); ?></span>
-    </footer>
+    <script src="main.js"></script>
 </body>
 </html>
