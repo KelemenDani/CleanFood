@@ -4,17 +4,6 @@ if (!isset($_SESSION['user'])) {
     header("Location: /login.php");
     exit();
 }
-
-include 'db_connection.php';
-
-try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Burger King')";
-    $stmt = $conn->prepare($query);
-    $stmt->execute();
-    $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (Exception $e) {
-    die("Hiba történt az ételek lekérésekor: " . $e->getMessage());
-}
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -22,7 +11,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mandala Étterem</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="ettermek.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -38,28 +28,9 @@ try {
     <main>
         <div class="main-content">
             <h2>Mandala Étterem ételei</h2>
-            <div class="food-list">
-                <?php foreach ($foods as $food): ?>
-                    <div class="food-item">
-                        <h3><?php echo htmlspecialchars($food['name']); ?></h3>
-                        <p>Ár: <?php echo htmlspecialchars($food['price']); ?> Ft</p>
-                        <button class="add-to-cart" data-food="<?php echo htmlspecialchars($food['name']); ?>" data-price="<?php echo htmlspecialchars($food['price']); ?>">Kosárba</button>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+            <div class="food-list"></div>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.add-to-cart');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const food = this.getAttribute('data-food');
-                    const price = this.getAttribute('data-price');
-                    alert(`Hozzáadva a kosárhoz: ${food} - ${price} Ft`);
-                });
-            });
-        });
-    </script>
+    <script src="mandala.js"></script>
 </body>
 </html>

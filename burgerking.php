@@ -8,14 +8,14 @@ if (!isset($_SESSION['user'])) {
 // Adatbázis kapcsolat
 include 'db_connection.php';
 
-// Burger King ételek lekérése
+// Burger King éttermek lekérése
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Burger King')";
+    $query = "SELECT address FROM restaurants WHERE name = 'Burger King'";
     $stmt = $conn->prepare($query);
     $stmt->execute();
-    $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $restaurants = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (Exception $e) {
-    die("Hiba történt az ételek lekérésekor: " . $e->getMessage());
+    die("Hiba történt az éttermek lekérésekor: " . $e->getMessage());
 }
 ?>
 <!DOCTYPE html>
@@ -23,8 +23,9 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burger King Ételek</title>
-    <link rel="stylesheet" href="main.css">
+    <title>Burger King</title>
+    <link rel="stylesheet" href="ettermek.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -39,29 +40,17 @@ try {
     </header>
     <main>
         <div class="main-content">
-            <h2>Burger King Ételek</h2>
-            <div class="food-list">
-                <?php foreach ($foods as $food): ?>
-                    <div class="food-item">
-                        <h3><?php echo htmlspecialchars($food['name']); ?></h3>
-                        <p>Ár: <?php echo htmlspecialchars($food['price']); ?> Ft</p>
-                        <button class="add-to-cart" data-food="<?php echo htmlspecialchars($food['name']); ?>" data-price="<?php echo htmlspecialchars($food['price']); ?>">Kosárba</button>
-                    </div>
+            <h2>Burger King</h2>
+            <label for="restaurant-select">Válassz melyikből szeretnéd:</label>
+            <select id="restaurant-select">
+                <option value="">Válassz...</option>
+                <?php foreach ($restaurants as $restaurant): ?>
+                    <option value="<?php echo htmlspecialchars($restaurant['address']); ?>"><?php echo htmlspecialchars($restaurant['address']); ?></option>
                 <?php endforeach; ?>
-            </div>
+            </select>
+            <div class="food-list"></div>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.add-to-cart');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const food = this.getAttribute('data-food');
-                    const price = this.getAttribute('data-price');
-                    alert(`Hozzáadva a kosárhoz: ${food} - ${price} Ft`);
-                });
-            });
-        });
-    </script>
+    <script src="burgerking.js"></script>
 </body>
 </html>
