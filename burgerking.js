@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const restaurantSelect = document.getElementById('restaurant-select');
     const foodList = document.querySelector('.food-list');
+    const restaurantSelect = document.getElementById('restaurant-select');
 
     restaurantSelect.addEventListener('change', function() {
         const restaurantAddress = this.value;
@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <label for="quantity-${food.name}">Darabszám:</label>
                                 <input type="number" id="quantity-${food.name}" name="quantity" min="1" value="1">
                             </div>
-                            <button class="add-to-cart" data-food="${food.name}" data-price="${food.price}">Kosárba</button>
-                            <button class="remove-from-cart" data-food="${food.name}" style="display:none;">Eltávolítás a kosárból</button>
+                            <button class="add-to-cart" data-food="${food.id}" data-price="${food.price}">Kosárba</button>
+                            <button class="remove-from-cart" data-food="${food.id}" style="display:none;">Eltávolítás a kosárból</button>
                         `;
                         foodList.appendChild(foodItem);
 
@@ -42,16 +42,47 @@ document.addEventListener('DOMContentLoaded', function() {
                         const quantityInput = foodItem.querySelector('input[name="quantity"]');
 
                         addToCartButton.addEventListener('click', function() {
-                            removeFromCartButton.style.display = 'inline-block';
-                            // Itt hozzáadhatod a kosárhoz a terméket a darabszámmal
-                            console.log(`Added ${quantityInput.value} of ${food.name} to cart`);
+                            const foodId = this.dataset.food;
+                            const quantity = parseInt(quantityInput.value);
+
+                            fetch('/add_to_cart.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ foodId, quantity })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert('Étel hozzáadva a kosárhoz!');
+                                    removeFromCartButton.style.display = 'inline-block';
+                                } else {
+                                    alert('Hiba történt az étel hozzáadásakor.');
+                                }
+                            });
                         });
 
                         removeFromCartButton.addEventListener('click', function() {
-                            removeFromCartButton.style.display = 'none';
-                            quantityInput.value = 1; // Alapértelmezett érték visszaállítása
-                            // Itt eltávolíthatod a terméket a kosárból
-                            console.log(`Removed ${food.name} from cart`);
+                            const foodId = this.dataset.food;
+
+                            fetch('/remove_from_cart.php', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({ foodId })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    alert('Étel eltávolítva a kosárból!');
+                                    removeFromCartButton.style.display = 'none';
+                                    quantityInput.value = 1;
+                                } else {
+                                    alert('Hiba történt az étel eltávolításakor.');
+                                }
+                            });
                         });
                     });
                 } else {

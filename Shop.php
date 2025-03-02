@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'db_connection.php';
 
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Burger King')";
+    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'CleanFood Shop')";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -22,7 +22,8 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanFood Shop</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="ettermek.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -33,11 +34,12 @@ try {
         </div>
         <nav>
             <a href="main.php">Vissza a főoldalra</a>
+            <a href="cart.php">Kosár</a>
         </nav>
     </header>
     <main>
         <div class="main-content">
-            <h2>CleanFood házhozszállítás</h2>
+            <h2>CleanFood Shop ételei</h2>
             <div class="food-list">
                 <?php foreach ($foods as $food): ?>
                     <div class="food-item">
@@ -49,17 +51,6 @@ try {
             </div>
         </div>
     </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const buttons = document.querySelectorAll('.add-to-cart');
-            buttons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const food = this.getAttribute('data-food');
-                    const price = this.getAttribute('data-price');
-                    alert(`Hozzáadva a kosárhoz: ${food} - ${price} Ft`);
-                });
-            });
-        });
-    </script>
+    <script src="shop.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost:3306
--- Létrehozás ideje: 2025. Feb 27. 13:59
+-- Létrehozás ideje: 2025. Már 02. 15:36
 -- Kiszolgáló verziója: 5.7.24
 -- PHP verzió: 8.3.1
 
@@ -176,20 +176,46 @@ INSERT INTO `foods` (`id`, `name`, `price`, `restaurants_id`, `allergens_id`) VA
 (82, 'Vegán briós', '1190.00', 10, 1),
 (83, 'Zserbó szelet', '1790.00', 10, 2),
 (84, 'Túrós citromos mákos torta SZELET', '1690.00', 10, 2),
-(85, 'Csirkés csoda burger minden', '4990.00', 10, 9),
-(86, 'Klasszikus marha mámor minden', '4990.00', 10, 9),
-(87, 'Margherita pizza vegán', '4890.00', 10, 9),
-(88, 'Sonkás pizza glutén', '5190.00', 10, 9),
-(89, 'Sajtos twister szója', '1399.00', 10, 8),
-(90, 'Bécsi sós perec szója', '1690.00', 10, 8),
+(85, 'Csirkés csoda burger', '4990.00', 10, 9),
+(86, 'Klasszikus marha mámor', '4990.00', 10, 9),
+(87, 'Margherita pizza', '4890.00', 10, 9),
+(88, 'Sonkás pizza', '5190.00', 10, 9),
+(89, 'Sajtos twister', '1399.00', 10, 8),
+(90, 'Bécsi sós perec', '1690.00', 10, 8),
 (91, 'Gluténmentes karamellás mandulatorta', '1490.00', 12, 1),
 (92, 'Vegán citromos, málnás muffin', '1290.00', 12, 3),
-(93, 'Málnás brownie (glutén)', '1490.00', 12, 1),
+(93, 'Málnás brownie', '1490.00', 12, 1),
 (94, 'Narancsos vegán croissant', '1090.00', 12, 3),
 (95, 'latte', '1440.00', 12, 9),
 (96, 'cold brew', '1640.00', 12, 9),
 (97, 'caramel frappuccino', '1940.00', 12, 9),
-(98, 'iced mocha', '1740.00', 12, 9);
+(98, 'iced mocha', '1740.00', 12, 9),
+(99, 'Vegán gyümölcstorta', '20000.00', 13, 3),
+(100, 'Málnás túrótorta szelet', '1700.00', 13, 2),
+(101, 'Bounty golyó', '600.00', 13, 1),
+(103, 'Málnás fehércsokis túró rudi torta', '16000.00', 13, 2),
+(104, 'Zserbó torta', '19000.00', 13, 2),
+(105, 'Pisztáciás mignon', '500.00', 13, 1),
+(106, 'Vegán Csokoládé tortaszelet', '1390.00', 14, 3),
+(107, 'Liszt- és Tejmentes Meggyes Mákos tortaszelet', '1440.00', 14, 2),
+(108, 'Cukor- és Lisztmentes Málnás Csoki szelet', '1490.00', 14, 1),
+(109, 'Lisztmentes Rusztikus Almás Diós Vaníliás tortaszelet', '1440.00', 14, 1),
+(110, 'Pisztáciás Vaníliás tortaszelet', '1490.00', 14, 1),
+(111, 'Sweet’n Marcell’s Burger', '5190.00', 15, 4),
+(112, 'Cheesy G Burger', '5190.00', 15, 9),
+(113, 'Ropogós sültkrumpli', '990.00', 15, 9),
+(114, 'Brownie', '1349.00', 16, 1),
+(115, 'Csokis muffin', '1639.00', 16, 1),
+(116, 'Sajtos pogácsa', '1024.00', 16, 1),
+(117, 'Sajtos snackrúd', '1024.00', 16, 1),
+(118, 'Kakaós csiga', '1415.00', 16, 1),
+(119, 'Csokis keksz', '1024.00', 16, 1),
+(120, 'Vegán Eper torta', '21000.00', 18, 3),
+(121, 'Vegán Pisztácia torta', '20000.00', 18, 3),
+(122, 'Vegán áfonyás csokoládés torta', '21000.00', 18, 3),
+(123, 'Nagyi kedvence', '19000.00', 18, 1),
+(124, 'Meggyes vaníliás torta', '19000.00', 18, 2),
+(125, 'Light Dió revolúció torta', '20000.00', 18, 1);
 
 -- --------------------------------------------------------
 
@@ -280,7 +306,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `jelszo`, `phonenumber`, `city`, `zipcode`) VALUES
 (21, 'weett', 'werner.valer@szechenyi.hu', '$2y$10$LNYbr8h.5VhjWLmNahJ6.OK7gb0jPBMdA0xIEqWAmdEuVpUwqe3Mi', '06203873375', 'SZEDERKÉNY', '7751'),
-(22, 'Werner Valér', 'werner.valer2005@gmail.com', '$2y$10$2yszI9fWIjjkMfh8GE/6seRdOo8mJCA0EhwKsMP3wMXj1aYwBVaZG', '06203873375', 'SZEDERKÉNY', '7751');
+(22, 'Werner Valér', 'werner.valer2005@gmail.com', '$2y$10$2yszI9fWIjjkMfh8GE/6seRdOo8mJCA0EhwKsMP3wMXj1aYwBVaZG', '06203873375', 'SZEDERKÉNY', '7751'),
+(23, 'Kelemen Dani', 'kelemendani6@gmail.com', '$2y$10$5DJFmS5U6ALG2oDV051dyeRlFcGnoEQYEGJbpJaPCcaurTpPe/aEK', '06300848809', 'Pécs', '7632');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -356,7 +383,7 @@ ALTER TABLE `couriers`
 -- AUTO_INCREMENT a táblához `foods`
 --
 ALTER TABLE `foods`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT a táblához `orders`
@@ -374,7 +401,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Megkötések a kiírt táblákhoz

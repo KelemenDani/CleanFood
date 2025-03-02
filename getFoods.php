@@ -11,7 +11,7 @@ if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address'])) {
                 SELECT f.name, f.price, a.name AS allergens 
                 FROM foods f
                 LEFT JOIN allergens a ON f.allergens_id = a.id
-                WHERE f.restaurants_id = (SELECT id FROM restaurants WHERE name = :restaurant_name)
+                WHERE f.restaurants_id = (SELECT id FROM restaurants WHERE name = :restaurant_name LIMIT 1)
             ";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':restaurant_name', $restaurantName, PDO::PARAM_STR);
@@ -20,7 +20,7 @@ if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address'])) {
                 SELECT f.name, f.price, a.name AS allergens 
                 FROM foods f
                 LEFT JOIN allergens a ON f.allergens_id = a.id
-                WHERE f.restaurants_id = (SELECT id FROM restaurants WHERE address = :restaurant_address)
+                WHERE f.restaurants_id = (SELECT id FROM restaurants WHERE address = :restaurant_address LIMIT 1)
             ";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':restaurant_address', $restaurantAddress, PDO::PARAM_STR);

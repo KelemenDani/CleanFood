@@ -1,30 +1,30 @@
 <?php
 session_start();
-
-$products = [
-    1 => ['id' => 1, 'name' => 'teszt', 'price' => 2990],
-    2 => ['id' => 2, 'name' => 'teszt', 'price' => 3990],
-    3 => ['id' => 3, 'name' => 'teszt', 'price' => 4490],
-];
-
-$_SESSION['cart'] = $_SESSION['cart'] ?? [];    
-
-
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+if (!isset($_SESSION['user'])) {
+    header("Location: /login.php");
+    exit();
 }
 
-if (isset($_GET['action']) && $_GET['action'] === 'add' && isset($_GET['id'])) {
-    $productId = (int)$_GET['id'];
-    if (isset($products[$productId])) {
-        $_SESSION['cart'][$productId] = ($_SESSION['cart'][$productId] ?? 0) + 1;
-    }
-}
+include 'db_connection.php';
 
-if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['id'])) {
-    $productId = (int)$_GET['id'];
-    if (isset($_SESSION['cart'][$productId])) {
-        unset($_SESSION['cart'][$productId]);
+// Kosár tartalmának lekérése
+$order_id = $_SESSION['order_id'] ?? null;
+$foods = [];
+$total = 0;
+
+if ($order_id) {
+    $query = "SELECT f.id, f.name, f.price, of.quantity 
+              FROM foods f
+              JOIN orderedfoods of ON f.id = of.foods_id
+              WHERE of.orders_id = :order_id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Összesen kiszámítása
+    foreach ($foods as $food) {
+        $total += $food['price'] * $food['quantity'];
     }
 }
 ?>
@@ -32,60 +32,49 @@ if (isset($_GET['action']) && $_GET['action'] === 'remove' && isset($_GET['id'])
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
-    <title>CleanFood</title>
-<link rel="stylesheet" href="kosar.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosár</title>
+    <link rel="stylesheet" href="kosar.css">
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>🛒 CleanFood - Kosár</h1>
-            <p>Egészséges életmód a mindennapokra</p>
-            <a href="main.php" class="btn" style="background-color: #4CAF50; color: white;">Vissza a főoldalra</a>
-        </div>
-
-        <div class="products">
-            <?php foreach ($products as $product): ?>
-            <div class="product-card">
-                <!-- <img src="<?= htmlspecialchars($product['image']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="product-image"> -->
-                <h3 class="product-title"><?= htmlspecialchars($product['name']) ?></h3>
-                <p class="product-price"><?= number_format($product['price'], 0, ',', ' ') ?> Ft</p>
-                <a href="?action=add&id=<?= $product['id'] ?>" class="btn">Kosárba</a>
-            </div>
-            <?php endforeach; ?>
-        </div>
-
-        <div class="cart">
-            <h2>🛍️ A kosaram</h2>
-            <?php if (!empty($_SESSION['cart'])): ?>
-                <table class="cart-table">
+        <h1>Kosár</h1>
+        <?php if (!empty($foods)): ?>
+            <table>
+                <thead>
                     <tr>
-                        <th>Termék</th>
+                        <th>Étel</th>
                         <th>Ár</th>
                         <th>Mennyiség</th>
                         <th>Összesen</th>
-                        <th></th>
+                        <th>Művelet</th>
                     </tr>
-                    <?php 
-                    $total = 0;
-                    foreach ($_SESSION['cart'] as $productId => $quantity): 
-                        $product = $products[$productId];
-                        $subtotal = $product['price'] * $quantity;
-                        $total += $subtotal;
-                    ?>
-                    <tr>
-                        <td><?= htmlspecialchars($product['name']) ?></td>
-                        <td><?= number_format($product['price'], 0, ',', ' ') ?> Ft</td>
-                        <td><?= $quantity ?></td>
-                        <td><?= number_format($subtotal, 0, ',', ' ') ?> Ft</td>
-                        <td><a href="?action=remove&id=<?= $productId ?>">❌</a></td>
-                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($foods as $food): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($food['name']); ?></td>
+                            <td><?php echo number_format($food['price'], 0, ',', ' '); ?> Ft</td>
+                            <td><?php echo $food['quantity']; ?></td>
+                            <td><?php echo number_format($food['price'] * $food['quantity'], 0, ',', ' '); ?> Ft</td>
+                            <td>
+                                <form action="remove_from_cart.php" method="post">
+                                    <input type="hidden" name="food_id" value="<?php echo $food['id']; ?>">
+                                    <button type="submit">Eltávolítás</button>
+                                </form>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
-                </table>
-                <div class="total">Végösszeg: <?= number_format($total, 0, ',', ' ') ?> Ft</div>
-            <?php else: ?>
-                <p>A kosara üres.</p>
-            <?php endif; ?>
-        </div>
+                </tbody>
+            </table>
+            <p>Összesen: <?php echo number_format($total, 0, ',', ' '); ?> Ft</p>
+            <form action="checkout.php" method="post">
+                <button type="submit">Fizetés</button>
+            </form>
+        <?php else: ?>
+            <p>A kosár üres.</p>
+        <?php endif; ?>
+        <a href="main.php">Vissza a főoldalra</a>
     </div>
 </body>
 </html>

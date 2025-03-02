@@ -140,5 +140,33 @@ if (!isset($_SESSION['user'])) {
         </div>
     </main>
     <script src="main.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const foodId = this.dataset.food;
+                const quantity = 1; // Alapértelmezett mennyiség
+
+                fetch('/add_to_cart.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ foodId, quantity })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Étel hozzáadva a kosárhoz!');
+                    } else {
+                        alert('Hiba történt az étel hozzáadásakor.');
+                    }
+                });
+            });
+        });
+    });
+    </script>
 </body>
 </html>
