@@ -40,16 +40,18 @@ $total = 0;
                 </thead>
                 <tbody>
                     <?php foreach ($foods as $foodId => $item): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($item['name']); ?></td>
-                            <td><?php echo number_format($item['price'], 0, ',', ' '); ?> Ft</td>
-                            <td><?php echo htmlspecialchars($item['quantity']); ?></td>
-                            <td><?php echo number_format($item['price'] * $item['quantity'], 0, ',', ' '); ?> Ft</td>
-                            <td>
-                                <button class="remove-button" onclick="removeFromCart('<?php echo htmlspecialchars($foodId); ?>')">Törlés</button>
-                            </td>
-                        </tr>
-                        <?php $total += $item['price'] * $item['quantity']; ?>
+                        <?php if (is_array($item)): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($item['name']); ?></td>
+                                <td><?php echo number_format($item['price'], 0, ',', ' '); ?> Ft</td>
+                                <td><?php echo htmlspecialchars($item['quantity']); ?></td>
+                                <td><?php echo number_format($item['price'] * $item['quantity'], 0, ',', ' '); ?> Ft</td>
+                                <td>
+                                    <button class="remove-button" onclick="removeFromCart('<?php echo htmlspecialchars($foodId); ?>')">Törlés</button>
+                                </td>
+                            </tr>
+                            <?php $total += $item['price'] * $item['quantity']; ?>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                 </tbody>
             </table>

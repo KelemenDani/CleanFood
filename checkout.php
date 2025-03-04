@@ -39,23 +39,33 @@ if ($order_id) {
     unset($_SESSION['order_id']);
 
     echo "Rendelés sikeresen leadva! Összesen fizetendő: " . number_format($total, 0, ',', ' ') . " Ft";
-} else {
-    echo "Nincs aktív rendelés.";
 }
 ?>
 <!DOCTYPE html>
-<html lang="hu">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fizetés</title>
-    <link rel="stylesheet" href="kosar.css">
+  <title>CleanFood</title>
+  <link rel="stylesheet" href="check.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Fizetés</h1>
-        <p>Rendelés sikeresen leadva! Összesen fizetendő: <?php echo number_format($total, 0, ',', ' '); ?> Ft</p>
-        <a href="main.php">Vissza a főoldalra</a>
+  <div class="container">
+    <h1>CleanFood</h1>
+    <div class="cart">
     </div>
-</body>
-</html>
+    <div class="payment-form">
+      <h2>Bankkártya megadása</h2>
+      <form>
+    <label for="card-number">Bankkártya szám:</label>
+    <input type="text" id="card-number" name="card-number" required>
+    <label for="card-name">Név:</label>
+    <input type="text" id="card-name" name="card-name">
+    <label for="cvc">CVC kód:</label>
+    <input type="password" id="cvc" name="cvc" pattern="[0-9]{3}" required>
+    <label for="expiration-date">Lejárati dátum:</label>
+    <input type="text" id="expiration-date" name="expiration-date" pattern="[0-9]{2}/[0-9]{2}" required>
+    <button type="submit">Fizetés</button>
+    <p id="payment-status"></p>
+  </form>
+    </div>
+    <script src="checkout.js"></script>
+  </div>
