@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'db_connection.php';
 
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Trüffel')";
+    $query = "SELECT name, price FROM foods WHERE restaurants_id = 14";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +21,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trüffel</title>
+    <title>Trüffel Cukrászda</title>
     <link rel="stylesheet" href="ettermek.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -39,7 +39,7 @@ try {
     </header>
     <main>
         <div class="main-content">
-            <h2>Trüffel ételei</h2>
+            <h2>Trüffel Cukrászda ételei</h2>
             <div class="food-list">
                 <?php foreach ($foods as $food): ?>
                     <div class="food-item">

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'db_connection.php';
 
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Megyeri Burgerező')";
+    $query = "SELECT name, price FROM foods WHERE restaurants_id = 15";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,6 +34,7 @@ try {
         </div>
         <nav>
             <a href="main.php">Vissza a főoldalra</a>
+            <a href="cart.php">Kosár</a>
         </nav>
     </header>
     <main>

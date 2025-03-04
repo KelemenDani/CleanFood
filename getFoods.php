@@ -1,9 +1,10 @@
 <?php
 include 'db_connection.php';
 
-if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address'])) {
+if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address']) || isset($_GET['restaurant_id'])) {
     $restaurantName = $_GET['restaurant_name'] ?? null;
     $restaurantAddress = $_GET['restaurant_address'] ?? null;
+    $restaurantId = $_GET['restaurant_id'] ?? null;
 
     try {
         if ($restaurantName) {
@@ -24,6 +25,15 @@ if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address'])) {
             ";
             $stmt = $conn->prepare($query);
             $stmt->bindParam(':restaurant_address', $restaurantAddress, PDO::PARAM_STR);
+        } elseif ($restaurantId) {
+            $query = "
+                SELECT f.name, f.price, a.name AS allergens 
+                FROM foods f
+                LEFT JOIN allergens a ON f.allergens_id = a.id
+                WHERE f.restaurants_id = :restaurant_id
+            ";
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(':restaurant_id', $restaurantId, PDO::PARAM_INT);
         }
 
         $stmt->execute();
@@ -38,6 +48,6 @@ if (isset($_GET['restaurant_name']) || isset($_GET['restaurant_address'])) {
         echo json_encode(['error' => 'Hiba történt az ételek lekérésekor: ' . $e->getMessage()]);
     }
 } else {
-    echo json_encode(['error' => 'Étterem neve vagy címe nem található.']);
+    echo json_encode(['error' => 'Étterem neve, címe vagy azonosítója nem található.']);
 }
 ?>

@@ -23,6 +23,7 @@ if (!isset($_SESSION['user'])) {
         </div>
         <nav>
             <a href="main.php">Vissza a főoldalra</a>
+            <a href="cart.php">Kosár</a>
         </nav>
     </header>
     <main>

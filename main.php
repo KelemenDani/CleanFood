@@ -55,9 +55,9 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="Vagamary.php">Vagamary Cukrászda</a></li>
                 <li><a href="Truffel.php">Trüffel</a></li>
                 <li><a href="Magda.php">Magda Cukrászda</a></li>
-                <li><a href="Buddha.php">Buddha Original</a></li>
+              
                 <li><a href="Megyeri.php">Megyeri Burgerező</a></li>
-                <li><a href="Pekinak.php">Pékinas</a></li>
+                
             </ul>
         </div>
         <div class="main-content">

@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'db_connection.php';
 
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = (SELECT id FROM restaurants WHERE name = 'Szafi Pékség')";
+    $query = "SELECT name, price FROM foods WHERE restaurants_id = 11";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
