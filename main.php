@@ -41,6 +41,11 @@ if (!isset($_SESSION['user'])) {
                 <a href="profil.php" class="profile-button">
                     <i class="fas fa-user"></i> Adatok
                 </a>
+                <?php if (isset($_SESSION['user']) && $_SESSION['user']['email'] == 'admin123@gmail.com'): ?>
+                    <a href="admin.php" class="admin-button">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </a>
+                <?php endif; ?>
             </div>
         </nav>
     </header>

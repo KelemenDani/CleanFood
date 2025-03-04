@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    function fetchFoods(restaurantAddress) {
-        fetch(`/getFoods.php?restaurant_address=${encodeURIComponent(restaurantAddress)}`)
+    function fetchFoods(restaurantName) {
+        fetch(`/getFoods.php?restaurant_name=${encodeURIComponent(restaurantName)}`)
             .then(response => response.json())
             .then(data => {
                 foodList.innerHTML = '';
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     data.forEach(food => {
                         const foodItem = document.createElement('div');
                         foodItem.classList.add('food-item');
-                        const imageUrl = `burgerking/${food.name.toLowerCase().replace(/ /g, '_')}.png`; // Kép URL generálása
+                        const imageUrl = `burger/${food.name.toLowerCase().replace(/ /g, '_')}.png`; // Kép URL generálása
                         foodItem.innerHTML = `
                             <img src="${imageUrl}" alt="${food.name}" class="food-image">
                             <h3>${food.name}</h3>
@@ -32,57 +32,33 @@ document.addEventListener('DOMContentLoaded', function() {
                                 <label for="quantity-${food.name}">Darabszám:</label>
                                 <input type="number" id="quantity-${food.name}" name="quantity" min="1" value="1">
                             </div>
-                            <button class="add-to-cart" data-food="${food.id}" data-price="${food.price}">Kosárba</button>
-                            <button class="remove-from-cart" data-food="${food.id}" style="display:none;">Eltávolítás a kosárból</button>
+                            <button class="add-to-cart" data-food="${food.name}" data-price="${food.price}">Kosárba</button>
+                            <button class="remove-from-cart" data-food="${food.name}" style="display:none;">Eltávolítás a kosárból</button>
+                            <button class="save-food" data-food="${food.name}" data-price="${food.price}">Mentés</button>
                         `;
                         foodList.appendChild(foodItem);
 
                         const addToCartButton = foodItem.querySelector('.add-to-cart');
                         const removeFromCartButton = foodItem.querySelector('.remove-from-cart');
+                        const saveFoodButton = foodItem.querySelector('.save-food');
                         const quantityInput = foodItem.querySelector('input[name="quantity"]');
 
                         addToCartButton.addEventListener('click', function() {
-                            const foodId = this.dataset.food;
-                            const quantity = parseInt(quantityInput.value);
-
-                            fetch('/add_to_cart.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ foodId, quantity })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    alert('Étel hozzáadva a kosárhoz!');
-                                    removeFromCartButton.style.display = 'inline-block';
-                                } else {
-                                    alert('Hiba történt az étel hozzáadásakor.');
-                                }
-                            });
+                            const quantity = parseInt(quantityInput.value, 10);
+                            addToCart(food.name, food.price, quantity);
+                            removeFromCartButton.style.display = 'inline-block';
+                            addToCartButton.style.display = 'none';
                         });
 
                         removeFromCartButton.addEventListener('click', function() {
-                            const foodId = this.dataset.food;
+                            removeFromCart(food.name);
+                            removeFromCartButton.style.display = 'none';
+                            addToCartButton.style.display = 'inline-block';
+                            quantityInput.value = 1; // Alapértelmezett érték visszaállítása
+                        });
 
-                            fetch('/remove_from_cart.php', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({ foodId })
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    alert('Étel eltávolítva a kosárból!');
-                                    removeFromCartButton.style.display = 'none';
-                                    quantityInput.value = 1;
-                                } else {
-                                    alert('Hiba történt az étel eltávolításakor.');
-                                }
-                            });
+                        saveFoodButton.addEventListener('click', function() {
+                            saveFood(food.name, food.price);
                         });
                     });
                 } else {
@@ -93,5 +69,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
                 foodList.innerHTML = '<p>Hiba történt az ételek lekérésekor.</p>';
             });
+    }
+
+    function addToCart(foodName, foodPrice, quantity) {
+        fetch('/add_to_cart.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: foodName,
+                price: foodPrice,
+                quantity: quantity
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Termék hozzáadva a kosárhoz!');
+            } else {
+                alert('Hiba történt: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function removeFromCart(foodName) {
+        fetch('/remove_from_cart.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: foodName
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Termék eltávolítva a kosárból!');
+            } else {
+                alert('Hiba történt: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    function saveFood(foodName, foodPrice) {
+        fetch('/save_food.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: foodName,
+                price: foodPrice
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Étel elmentve!');
+            } else {
+                alert('Hiba történt: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 });

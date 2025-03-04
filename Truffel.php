@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])) {
 include 'db_connection.php';
 
 try {
-    $query = "SELECT name, price FROM foods WHERE restaurants_id = 14";
+    $query = "SELECT id, name, price FROM foods WHERE restaurants_id = 14";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -45,7 +45,16 @@ try {
                     <div class="food-item">
                         <h3><?php echo htmlspecialchars($food['name']); ?></h3>
                         <p>Ár: <?php echo htmlspecialchars($food['price']); ?> Ft</p>
-                        <button class="add-to-cart" data-food="<?php echo htmlspecialchars($food['name']); ?>" data-price="<?php echo htmlspecialchars($food['price']); ?>">Kosárba</button>
+                        <form action="add_to_cart.php" method="post">
+                            <input type="hidden" name="food_id" value="<?php echo htmlspecialchars($food['id']); ?>">
+                            <label for="quantity">Mennyiség:</label>
+                            <input type="number" name="quantity" value="1" min="1">
+                            <button type="submit">Kosárba</button>
+                        </form>
+                        <form action="remove_from_cart.php" method="post">
+                            <input type="hidden" name="food_id" value="<?php echo htmlspecialchars($food['id']); ?>">
+                            <button type="submit">Eltávolítás</button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>

@@ -1,31 +1,26 @@
 <?php
 session_start();
-header('Content-Type: application/json');
+
+if (!isset($_SESSION['user'])) {
+    echo json_encode(['success' => false, 'message' => 'Nincs bejelentkezve']);
+    exit();
+}
 
 $data = json_decode(file_get_contents('php://input'), true);
-$foodId = $data['foodId'];
-$quantity = $data['quantity'];
 
-include 'db_connection.php';
-
-$query = "SELECT name, price FROM foods WHERE id = :foodId";
-$stmt = $conn->prepare($query);
-$stmt->bindParam(':foodId', $foodId, PDO::PARAM_INT);
-$stmt->execute();
-$food = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if ($food) {
-    $foodName = $food['name'];
-    $foodPrice = $food['price'];
+if (isset($data['name'], $data['price'], $data['quantity'])) {
+    $foodName = $data['name'];
+    $foodPrice = $data['price'];
+    $quantity = $data['quantity'];
 
     if (!isset($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
 
-    if (isset($_SESSION['cart'][$foodId])) {
-        $_SESSION['cart'][$foodId]['quantity'] += $quantity;
+    if (isset($_SESSION['cart'][$foodName])) {
+        $_SESSION['cart'][$foodName]['quantity'] += $quantity;
     } else {
-        $_SESSION['cart'][$foodId] = [
+        $_SESSION['cart'][$foodName] = [
             'name' => $foodName,
             'price' => $foodPrice,
             'quantity' => $quantity
@@ -34,6 +29,6 @@ if ($food) {
 
     echo json_encode(['success' => true]);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Étel nem található.']);
+    echo json_encode(['success' => false, 'message' => 'Hiányzó adatok']);
 }
 ?>

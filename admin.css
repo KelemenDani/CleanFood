@@ -1,0 +1,133 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('profil.png') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.profile-container {
+    max-width: 1400px; /* Növeljük a maximális szélességet */
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(106, 76, 54, 0.8); /* Sötétebb barna háttér, átlátszó */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Lekerekített sarkok */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    table-layout: fixed; /* Fix táblázat elrendezés */
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden; /* Szöveg elrejtése, ha túl hosszú */
+    text-overflow: ellipsis; /* Három pont a túl hosszú szövegekhez */
+    white-space: nowrap; /* Sor tördelésének megakadályozása */
+}
+
+table th {
+    background-color: #3d8b40; /* Zöld fejlécek */
+    color: white;
+}
+
+table td {
+    background-color: #f9f9f9; /* Világos cellák */
+    color: #000000;
+}
+
+td:nth-child(1) { /* ID oszlop */
+    max-width: 25px; /* Csökkentjük a maximális szélességet */
+}
+
+td:nth-child(2) { /* Név oszlop */
+    max-width: 150px;
+}
+
+td:nth-child(3) { /* Email oszlop */
+    max-width: 200px;
+}
+
+td:nth-child(4) { /* Telefonszám oszlop */
+    max-width: 150px;
+}
+
+td:nth-child(5) { /* Város oszlop */
+    max-width: 150px;
+}
+
+td:nth-child(6) { /* Irányítószám oszlop */
+    max-width: 70px;
+}
+
+td:nth-child(7) { /* Műveletek oszlop */
+    max-width: 150px; /* Csökkentjük a maximális szélességet */
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column; /* Gombok egymás alatt */
+}
+
+button {
+    padding: 10px 15px;
+    color: #fff;
+    border: 1px solid #ccc; /* Gombok kerete */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 5px; /* Térköz a gombok között */
+}
+
+button.delete {
+    background-color: #dc3545;
+}
+
+button.delete:hover {
+    background-color: #c82333;
+}
+
+button.edit {
+    background-color: #007bff;
+}
+
+button.edit:hover {
+    background-color: #0056b3;
+}
+
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #ccc; /* Gombok kerete */
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
