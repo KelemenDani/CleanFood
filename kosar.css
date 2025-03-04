@@ -10,6 +10,10 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    background-image: url('hatterkep2.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
 }
 
 .container {
@@ -18,6 +22,7 @@ body {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
 
 .header {
@@ -149,4 +154,8 @@ a, button {
 
 a:hover, button:hover {
     background-color: #555;
+}
+
+p{
+    padding-bottom: 10px;
 }
