@@ -2,16 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f2f2f2;
+    background: url('hatterkep2.png') no-repeat center center fixed;
+    background-size: cover;
 }
 
 .container {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.6);
     border: 1px solid #ddd;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
 .cart {
@@ -48,15 +50,17 @@ body {
 .payment-form label {
     display: block;
     margin-bottom: 10px;
+    margin-left: 1.5cm;
 }
 
 .payment-form input {
-    width: 100%;
+    width: 80%;
     height: 15px;
-    padding: 10px;
+    padding: 7.5px;
     margin-bottom: 20px;
     border: 1px solid #131212;
     border-radius: 5px;
+    margin-left: 1.5cm;
 }
 
 .payment-form button,
@@ -89,4 +93,7 @@ body {
 .minimal-button:hover {
     background-color: #000;
     color: #fff;
+}
+h2{
+    text-align: center;
 }

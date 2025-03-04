@@ -55,18 +55,25 @@ if ($order_id) {
     <div class="payment-form">
       <h2>Bankkártya megadása</h2>
       <form>
-    <label for="card-number">Bankkártya szám:</label>
-    <input type="text" id="card-number" name="card-number" required>
-    <label for="card-name">Név:</label>
-    <input type="text" id="card-name" name="card-name">
-    <label for="cvc">CVC kód:</label>
-    <input type="password" id="cvc" name="cvc" pattern="[0-9]{3}" required>
-    <label for="expiration-date">Lejárati dátum:</label>
-    <input type="text" id="expiration-date" name="expiration-date" pattern="[0-9]{2}/[0-9]{2}" required>
-    <button type="submit">Fizetés</button>
-    <button id="back-to-main" class="minimal-button">Vissza a főoldalra</button>
-    <p id="payment-status"></p>
-  </form>
+        <label for="card-number">Bankkártya szám:</label>
+        <input type="text" id="card-number" name="card-number" required>
+        <label for="card-name">Név:</label>
+        <input type="text" id="card-name" name="card-name">
+        <label for="cvc">CVC kód:</label>
+        <input type="password" id="cvc" name="cvc" pattern="[0-9]{3}" required>
+        <label for="expiration-date">Lejárati dátum:</label>
+        <input type="text" id="expiration-date" name="expiration-date" pattern="[0-9]{2}/[0-9]{2}" required>
+        <label for="shipping-address">Szállítási cím:</label>
+        <input type="text" id="shipping-address" name="shipping-address" required>
+        <label for="delivery-instructions">Szállítási utasítások:</label>
+        <input type="text" id="delivery-instructions" name="delivery-instructions">
+        <button type="submit">Fizetés</button>
+        <br><p></p>
+        <a href="main.php" class="back-link">Vissza a főoldalra</a>
+        <p id="payment-status"></p>
+      </form>
     </div>
     <script src="checkout.js"></script>
   </div>
+</body>
+</html>
