@@ -64,6 +64,7 @@ if ($order_id) {
     <label for="expiration-date">Lejárati dátum:</label>
     <input type="text" id="expiration-date" name="expiration-date" pattern="[0-9]{2}/[0-9]{2}" required>
     <button type="submit">Fizetés</button>
+    <button id="back-to-main" class="minimal-button">Vissza a főoldalra</button>
     <p id="payment-status"></p>
   </form>
     </div>
