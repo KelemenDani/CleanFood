@@ -5,27 +5,13 @@ if (!isset($_SESSION['user'])) {
     exit();
 }
 
-include 'db_connection.php';
-
 // Kosár tartalmának lekérése
-$order_id = $_SESSION['order_id'] ?? null;
-$foods = [];
+$foods = $_SESSION['cart'] ?? [];
 $total = 0;
 
-if ($order_id) {
-    $query = "SELECT f.id, f.name, f.price, of.quantity 
-              FROM foods f
-              JOIN orderedfoods of ON f.id = of.foods_id
-              WHERE of.orders_id = :order_id";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':order_id', $order_id, PDO::PARAM_INT);
-    $stmt->execute();
-    $foods = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Összesen kiszámítása
-    foreach ($foods as $food) {
-        $total += $food['price'] * $food['quantity'];
-    }
+// Összesen kiszámítása
+foreach ($foods as $food) {
+    $total += $food['price'] * $food['quantity'];
 }
 ?>
 <!DOCTYPE html>
@@ -51,15 +37,15 @@ if ($order_id) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($foods as $food): ?>
+                    <?php foreach ($foods as $foodId => $details): ?>
                         <tr>
-                            <td><?php echo htmlspecialchars($food['name']); ?></td>
-                            <td><?php echo number_format($food['price'], 0, ',', ' '); ?> Ft</td>
-                            <td><?php echo $food['quantity']; ?></td>
-                            <td><?php echo number_format($food['price'] * $food['quantity'], 0, ',', ' '); ?> Ft</td>
+                            <td><?php echo htmlspecialchars($details['name']); ?></td>
+                            <td><?php echo number_format($details['price'], 0, ',', ' '); ?> Ft</td>
+                            <td><?php echo $details['quantity']; ?></td>
+                            <td><?php echo number_format($details['price'] * $details['quantity'], 0, ',', ' '); ?> Ft</td>
                             <td>
                                 <form action="remove_from_cart.php" method="post">
-                                    <input type="hidden" name="food_id" value="<?php echo $food['id']; ?>">
+                                    <input type="hidden" name="food_id" value="<?php echo htmlspecialchars($foodId); ?>">
                                     <button type="submit">Eltávolítás</button>
                                 </form>
                             </td>

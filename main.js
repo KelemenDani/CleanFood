@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
+
     function updateTime() {
         const now = new Date();
         
@@ -43,4 +44,56 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Show the first food item initially
     showFoodItem(currentIndex);
+
+    // Search functionality
+    const searchBtn = document.getElementById('searchBtn');
+    const searchText = document.getElementById('searchText');
+
+    searchBtn.addEventListener('click', function() {
+        const query = searchText.value.toLowerCase();
+        console.log('Search query:', query); // Debugging log
+        const foodItems = document.querySelectorAll('.food-item');
+
+        let found = false;
+        foodItems.forEach(item => {
+            const foodNameElement = item.querySelector('.food-name a');
+            if (foodNameElement) {
+                const foodName = foodNameElement.textContent.toLowerCase();
+                console.log('Checking food item:', foodName); // Debugging log
+                if (foodName.includes(query)) {
+                    item.scrollIntoView({ behavior: 'smooth' });
+                    found = true;
+                }
+            }
+        });
+
+        if (!found) {
+            alert('Nincs találat az adott keresésre.');
+        }
+    });
+
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const foodId = this.dataset.foodId;
+            const quantity = 1; // Default quantity
+
+            fetch('/add_to_cart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ foodId, quantity })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Étel hozzáadva a kosárhoz!');
+                } else {
+                    alert('Hiba történt az étel hozzáadásakor.');
+                }
+            });
+        });
+    });
 });

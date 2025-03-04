@@ -19,8 +19,15 @@ if (!isset($_SESSION['user'])) {
     <header>
         <div class="logo">Cleanfood</div>
         <div class="tagline">HEATHEN-FREE</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Keresés...">
+        <div class="input-group">
+            <!-- keresés input -->
+            <input id="searchText" class="form-control border-end-0 border rounded-pill" type="search" placeholder="search">
+            <span class="input-group-append">
+                <!-- keresés gomb -->
+                <button id="searchBtn" class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
         </div>
         <nav>
             <?php if (!isset($_SESSION['user'])): ?>
@@ -140,33 +147,5 @@ if (!isset($_SESSION['user'])) {
         </div>
     </main>
     <script src="main.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const addToCartButtons = document.querySelectorAll('.add-to-cart');
-
-        addToCartButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const foodId = this.dataset.food;
-                const quantity = 1; // Alapértelmezett mennyiség
-
-                fetch('/add_to_cart.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ foodId, quantity })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert('Étel hozzáadva a kosárhoz!');
-                    } else {
-                        alert('Hiba történt az étel hozzáadásakor.');
-                    }
-                });
-            });
-        });
-    });
-    </script>
 </body>
 </html>

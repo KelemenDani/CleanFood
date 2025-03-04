@@ -88,8 +88,9 @@ nav a {
 }
 
 .food-item img.food-image {
-    width: 100%;
-    height: auto;
+    width: 200px; /* Set your desired width */
+    height: 150px; /* Set your desired height */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
     border-radius: 10px;
     margin-bottom: 10px;
 }

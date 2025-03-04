@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: localhost:3306
--- Létrehozás ideje: 2025. Már 02. 15:36
+-- Létrehozás ideje: 2025. Már 04. 09:11
 -- Kiszolgáló verziója: 5.7.24
 -- PHP verzió: 8.3.1
 
@@ -215,7 +215,20 @@ INSERT INTO `foods` (`id`, `name`, `price`, `restaurants_id`, `allergens_id`) VA
 (122, 'Vegán áfonyás csokoládés torta', '21000.00', 18, 3),
 (123, 'Nagyi kedvence', '19000.00', 18, 1),
 (124, 'Meggyes vaníliás torta', '19000.00', 18, 2),
-(125, 'Light Dió revolúció torta', '20000.00', 18, 1);
+(125, 'Light Dió revolúció torta', '20000.00', 18, 1),
+(126, 'Banán', '150.00', 19, 9),
+(127, 'Fahéj', '190.00', 19, 9),
+(128, 'Avokádó', '600.00', 19, 9),
+(129, 'Laktózmentes-Tej', '600.00', 19, 2),
+(130, 'Gluténmentes-Liszt', '1000.00', 19, 1),
+(131, 'Gluténmentes-Kenyér', '800.00', 19, 1),
+(132, 'Cukkini', '500.00', 19, 9),
+(133, 'Répa', '80.00', 19, 9),
+(134, 'Laktózmentes-Joghurt', '1000.00', 19, 2),
+(135, 'Szójakocka', '415.00', 19, 3),
+(136, 'Vegán szalámi', '900.00', 19, 3),
+(137, 'Tojás(10)', '700.00', 19, 9),
+(138, 'Laktózmentes Túró-rudi', '320.00', 19, 2);
 
 -- --------------------------------------------------------
 
@@ -282,7 +295,8 @@ INSERT INTO `restaurants` (`id`, `name`, `city`, `address`, `opening`) VALUES
 (15, 'Megyeri Burgers', 'Pécs', 'Megyeri út 121.', '17-23'),
 (16, 'Pékinas', 'Pécs', 'Hengermalom utca 8.', '6-20:30'),
 (17, 'Buddha Original Thai Wok and Sushi Bar', 'Pécs', 'Széchenyi tér 16-17', '11-24'),
-(18, 'Magda Cukrászda', 'Pécs', 'Kandó Kálmán utca 4.', '10-19');
+(18, 'Magda Cukrászda', 'Pécs', 'Kandó Kálmán utca 4.', '10-19'),
+(19, 'Cleanfood Shop', 'Pécs', 'Siklósi út 3', '-24');
 
 -- --------------------------------------------------------
 
@@ -383,7 +397,7 @@ ALTER TABLE `couriers`
 -- AUTO_INCREMENT a táblához `foods`
 --
 ALTER TABLE `foods`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT a táblához `orders`
@@ -395,7 +409,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT a táblához `restaurants`
 --
 ALTER TABLE `restaurants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT a táblához `users`

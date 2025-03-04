@@ -2,49 +2,38 @@
 session_start();
 header('Content-Type: application/json');
 
-include 'db_connection.php';
-
 $data = json_decode(file_get_contents('php://input'), true);
 $foodId = $data['foodId'];
 $quantity = $data['quantity'];
 
-if (!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
-}
+include 'db_connection.php';
 
-if (isset($_SESSION['cart'][$foodId])) {
-    $_SESSION['cart'][$foodId] += $quantity;
-} else {
-    $_SESSION['cart'][$foodId] = $quantity;
-}
+$query = "SELECT name, price FROM foods WHERE id = :foodId";
+$stmt = $conn->prepare($query);
+$stmt->bindParam(':foodId', $foodId, PDO::PARAM_INT);
+$stmt->execute();
+$food = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Mentés az adatbázisba
-try {
-    $conn->beginTransaction();
+if ($food) {
+    $foodName = $food['name'];
+    $foodPrice = $food['price'];
 
-    // Rendelés létrehozása, ha még nincs
-    if (!isset($_SESSION['order_id'])) {
-        $query = "INSERT INTO orders (user_id, total_price) VALUES (:user_id, 0)";
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(':user_id', $_SESSION['user']['id'], PDO::PARAM_INT);
-        $stmt->execute();
-        $_SESSION['order_id'] = $conn->lastInsertId();
+    if (!isset($_SESSION['cart'])) {
+        $_SESSION['cart'] = [];
     }
 
-    // Étel hozzáadása a rendeléshez
-    $query = "INSERT INTO orderedfoods (orders_id, foods_id, quantity) VALUES (:orders_id, :foods_id, :quantity)
-              ON DUPLICATE KEY UPDATE quantity = quantity + VALUES(quantity)";
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(':orders_id', $_SESSION['order_id'], PDO::PARAM_INT);
-    $stmt->bindParam(':foods_id', $foodId, PDO::PARAM_INT);
-    $stmt->bindParam(':quantity', $quantity, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $conn->commit();
+    if (isset($_SESSION['cart'][$foodId])) {
+        $_SESSION['cart'][$foodId]['quantity'] += $quantity;
+    } else {
+        $_SESSION['cart'][$foodId] = [
+            'name' => $foodName,
+            'price' => $foodPrice,
+            'quantity' => $quantity
+        ];
+    }
 
     echo json_encode(['success' => true]);
-} catch (Exception $e) {
-    $conn->rollBack();
-    echo json_encode(['success' => false, 'error' => $e->getMessage()]);
+} else {
+    echo json_encode(['success' => false, 'message' => 'Étel nem található.']);
 }
 ?>
