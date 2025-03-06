@@ -52,7 +52,7 @@ if (!isset($_SESSION['user'])) {
     <main>
         <div class="sidebar">
         <footer class="footer">
-        <span id="currentTime"></span>
+        <span id="time"></span>
     </footer>
             <h2>Éttermeink</h2>
             <ul>

@@ -16,21 +16,22 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
     }
 
-    function updateTime() {
-        const now = new Date();
-        
-        const formattedTime = 
-            now.getFullYear() + "-" + 
-            String(now.getMonth()+1).padStart(2, '0') + "-" + 
-            String(now.getDate()).padStart(2, '0') + " " + 
-            String(now.getHours()).padStart(2, '0') + ":" + 
-            String(now.getMinutes()).padStart(2, '0') + ":" + 
-            String(now.getSeconds()).padStart(2, '0');
-        
-        document.getElementById('currentTime').textContent = formattedTime;
+    async function getCurrentTime() {
+        try {
+            const response = await fetch("https://timeapi.io/api/Time/current/zone?timeZone=Europe/Budapest");
+            if (!response.ok) {
+                throw new Error("Hiba történt az idő lekérése során.");
+            }
+            const data = await response.json();
+            const currentTime = `${data.date} ${data.time}`;
+            document.getElementById("time").textContent = currentTime;
+        } catch (error) {
+            document.getElementById("time").textContent = "Hiba: " + error.message;
+        }
     }
-    setInterval(updateTime, 1000);
-    updateTime();
+    
+    window.onload = getCurrentTime;
+    setInterval(getCurrentTime, 1000);
 
     nextButton.addEventListener('click', function() {
         currentIndex = (currentIndex + 1) % foodItems.length;

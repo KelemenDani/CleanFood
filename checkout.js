@@ -1,53 +1,74 @@
-const expirationDateInput = document.querySelector('#expiration-date');
+document.addEventListener('DOMContentLoaded', function () {
+  const deliveryType = document.getElementById('delivery-type'); // Szállítási mód választó
+  const deliveryTimeSection = document.getElementById('delivery-time'); // Időpont választó szekció
+  const form = document.querySelector('form'); // Űrlap
+  const paymentStatus = document.querySelector('#payment-status'); // Fizetési státusz üzenet
 
-expirationDateInput.addEventListener('input', () => {
-  const value = expirationDateInput.value;
-  if (value.length === 2) {
-    expirationDateInput.value += '/';
-  }
-});
+  // Szállítási mód változásának figyelése
+  deliveryType.addEventListener('change', function () {
+    if (deliveryType.value === 'preorder') {
+      deliveryTimeSection.classList.remove('hidden'); // Időpont választó megjelenítése
+    } else {
+      deliveryTimeSection.classList.add('hidden'); // Időpont választó elrejtése
+    }
+  });
 
-const cardNumberInput = document.querySelector('#card-number');
+  // Űrlap elküldésének kezelése
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // Alapértelmezett űrlap elküldés megakadályozása
 
-cardNumberInput.addEventListener('input', () => {
-  const value = cardNumberInput.value.replace(/\s+/g, '');
-  const formattedValue = value.match(/.{1,4}/g).join(' ');
-  cardNumberInput.value = formattedValue;
-});
+    // Adatok összegyűjtése
+    const deliveryTypeValue = deliveryType.value; // Szállítási mód
 
-const form = document.querySelector('form');
-const paymentStatus = document.querySelector('#payment-status');
+    const deliveryTime = document.getElementById('delivery-time')?.value; // Szállítási idő
+    const paymentMethod = document.getElementById('payment-method').value; // Fizetési mód
+    const shippingAddress = document.getElementById('shipping-address').value; // Szállítási cím
+    const deliveryInstructions = document.getElementById('delivery-instructions').value; // Szállítási utasítások
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const cardNumber = document.querySelector('#card-number').value.replace(/\s+/g, '');
-  const cvc = document.querySelector('#cvc').value;
-  const expirationDate = document.querySelector('#expiration-date').value;
+    // Validáció
+    if (deliveryTypeValue === 'preorder' && ( !deliveryTime)) {
+      paymentStatus.textContent = 'Kérjük, válassza ki az időt!';
+      paymentStatus.style.color = 'red';
+      return;
+    }
 
-  if (cardNumber.length === 16 && cvc.length === 3 && expirationDate.length === 5) {
-    alert('Sikeres fizetés!');
-    
-    // Send email to the user
-    fetch('/send-email.php', {
+    if (!shippingAddress) {
+      paymentStatus.textContent = 'Kérjük, adja meg a szállítási címet!';
+      paymentStatus.style.color = 'red';
+      return;
+    }
+
+    // Sikeres rendelés üzenet
+    paymentStatus.textContent = 'Rendelés sikeresen leadva!';
+    paymentStatus.style.color = 'green';
+
+    // Adatok elküldése a szerverre (pl. fetch API-val)
+    const orderData = {
+      deliveryType: deliveryTypeValue,
+     
+      deliveryTime: deliveryTypeValue === 'preorder' ? deliveryTime : null, // Csak előrendelés esetén küldjük az időt
+      paymentMethod: paymentMethod,
+      shippingAddress: shippingAddress,
+      deliveryInstructions: deliveryInstructions,
+    };
+
+    fetch('/submit-order.php', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ message: 'Sikeres fizetés cleanfood' })
+      body: JSON.stringify(orderData),
     })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        console.log('Email sent successfully');
-      } else {
-        console.error('Failed to send email');
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  } else {
-    paymentStatus.textContent = 'Nem sikerült a fizetés!';
-    paymentStatus.style.color = 'red';
-  }
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          console.log('Rendelés sikeresen feldolgozva!');
+        } else {
+          console.error('Hiba a rendelés feldolgozása során.');
+        }
+      })
+      .catch((error) => {
+        console.error('Hiba:', error);
+      });
+  });
 });
