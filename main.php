@@ -20,14 +20,6 @@ if (!isset($_SESSION['user'])) {
         <div class="logo">Cleanfood</div>
         <div class="tagline">HEATHEN-FREE</div>
         <div class="input-group">
-            <!-- keresés input -->
-            <input id="searchText" class="form-control border-end-0 border rounded-pill" type="search" placeholder="search">
-            <span class="input-group-append">
-                <!-- keresés gomb -->
-                <button id="searchBtn" class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
-                    <i class="fa fa-search"></i>
-                </button>
-            </span>
         </div>
         <nav>
             <?php if (!isset($_SESSION['user'])): ?>

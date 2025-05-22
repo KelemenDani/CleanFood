@@ -31,9 +31,6 @@ try {
     <header>
         <div class="logo">Cleanfood</div>
         <div class="tagline">HEATHEN-FREE</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Keresés...">
-        </div>
         <nav>
             <a href="main.php">Vissza a főoldalra</a>
             <a href="cart.php">Kosár</a>

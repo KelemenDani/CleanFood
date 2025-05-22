@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', function () {
   const deliveryType = document.getElementById('delivery-type'); // Szállítási mód választó
   const deliveryTimeSection = document.getElementById('delivery-time'); // Időpont választó szekció
-  const form = document.querySelector('form'); // Űrlap
+  const form = document.getElementById('order-form'); // Űrlap
   const paymentStatus = document.querySelector('#payment-status'); // Fizetési státusz üzenet
+  const modal = document.getElementById('success-modal');
+  const closeBtn = document.getElementsByClassName('close')[0];
 
   // Szállítási mód változásának figyelése
   deliveryType.addEventListener('change', function () {
@@ -24,19 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const paymentMethod = document.getElementById('payment-method').value; // Fizetési mód
     const shippingAddress = document.getElementById('shipping-address').value; // Szállítási cím
     const deliveryInstructions = document.getElementById('delivery-instructions').value; // Szállítási utasítások
-
-    // Validáció
-    if (deliveryTypeValue === 'preorder' && ( !deliveryTime)) {
-      paymentStatus.textContent = 'Kérjük, válassza ki az időt!';
-      paymentStatus.style.color = 'red';
-      return;
-    }
-
-    if (!shippingAddress) {
-      paymentStatus.textContent = 'Kérjük, adja meg a szállítási címet!';
-      paymentStatus.style.color = 'red';
-      return;
-    }
 
     // Sikeres rendelés üzenet
     paymentStatus.textContent = 'Rendelés sikeresen leadva!';
@@ -63,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
       .then((data) => {
         if (data.success) {
           console.log('Rendelés sikeresen feldolgozva!');
+          modal.style.display = 'block';
         } else {
           console.error('Hiba a rendelés feldolgozása során.');
         }
@@ -71,4 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Hiba:', error);
       });
   });
+
+  closeBtn.onclick = function() {
+    modal.style.display = 'none';
+  }
+
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
 });
